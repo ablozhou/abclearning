@@ -1,0 +1,11 @@
+1	的	8302698	3.20749980987	de/di2/di4	(possessive particle)/of, really and truly, aim/clear
+2	一	3728398	4.64785520713	yi1	one/1/single/a(n)
+3	不	3083707	5.83915345936	bu4/bu2	(negative prefix)/not/no
+4	是	3017244	7.00477571328	shi4	is/are/am/yes/to be
+5	了	2588626	8.00481418304	le/liao3/liao4	(modal particle intensifying preceding clause)/(completed action marker), to know/to understand/to know, clear, look afar from a high place
+6	人	2508086	8.97373842528	ren2	man/person/people
+7	在	2265802	9.84906346832	zai4	(located) at/in/exist
+8	有	2249248	10.7179933671	you3	to have/there is/there are/to exist/to be
+9	我	1939038	11.4670828819	wo3	I/me/myself
+10	他	1835410	12.1761388087	ta1	he/him
+11	这	1735712	12.846679386	zhe4/zhei4	this/these, this/these/(sometimes used before a measure word, especially in Beijing)
