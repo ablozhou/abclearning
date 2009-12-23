@@ -26,39 +26,45 @@
 import datetime
 
 dest = {1:'stdout',2:'stderr',3:'file'}  #stdout
-
+logs = ['info','debug','warn','error','fatal']
 class log4py:
-    def __init__(self,filename='log4py.txt',flag=None):
+    def __init__(self,modulename='gloabal',flag=logs,filename='log4py.txt'):
         self.filename = filename
         self.flag=flag
+        self.modulename = modulename
         
     
     def _gettime(self):
         return datetime.datetime.now().isoformat()
     #flag = INFO,DEBUG,WARNING,ERROR,FATAL
     def output(self, *fmt):
-        
-        print fmt
+        for s in fmt:
+            print s,
+        print '\n'
     
     def debug(self,*fmt):
-        #if self.flag>=DEBUG :
-        self.output(self._gettime(),'[DEBUG]',*fmt)
+        #print self.flag
+        if 'debug' in self.flag:
+            self.output(self._gettime(),'[DEBUG]',self.modulename,*fmt)
              
     def warn(self,*fmt):
-    #if self.flag>=WARN :
-        self.output(self._gettime(),'[WARN]',*fmt)
+        if 'warn' in self.flag:
+            self.output(self._gettime(),'[WARN]',self.modulename,*fmt)
 
     def info(self,*fmt):
-        self.output(self._gettime(),'[INFO]',*fmt)
+        self.output(self._gettime(),'[INFO]',self.modulename,*fmt)
         
     def error(self,*fmt):
-        self.output(self._gettime(),'[ERROR]',*fmt)
-        
+        print '\033[0;30;41m',
+        self.output(self._gettime(),'[ERROR]',self.modulename,*fmt)
+        print '\033[0m'
     def fatal(self,*fmt):
-        self.output(self._gettime(),'[FATAL',*fmt)
+        self.output(self._gettime(),'[FATAL',self.modulename,*fmt)
         
 #unit test
 if __name__ == '__main__':
     log=log4py()
     log.output('INFO','stdout','test')
     log.debug('debug information 调试')
+    log.error('errorrrrrrrrrrrrrrr')
+    log.debug('hello')
