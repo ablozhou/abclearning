@@ -8,15 +8,7 @@ import time
 
 import modules 
 
-f=codecs.open('char1.txt', 'r','utf8')
-dict = hanzi.MyDict() 
-for line in f.readlines():
-    print line
-    for  char in line:
-        print char
-        dict.addchar(hanzi.Char(char))
-    
-f.close()
+
 
 #todo group 要作成迭代器
 def getnext(Char):

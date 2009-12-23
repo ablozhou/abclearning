@@ -10,6 +10,7 @@ class Hanzi:
         self.freq=1
         self.pinyin=''
         self.bihua=1
+        self.english=''
         
     def setfreq(self, freq):
         self.freq = freq
