@@ -9,3 +9,62 @@
 9	我	1939038	11.4670828819	wo3	I/me/myself
 10	他	1835410	12.1761388087	ta1	he/him
 11	这	1735712	12.846679386	zhe4/zhei4	this/these, this/these/(sometimes used before a measure word, especially in Beijing)
+12	为	1484873	13.420315795	wei2/wei4	act as/take...to be/to be/to do/to serve as/to become, because of/for/to
+13	之	1459824	13.9842752696	zhi1	(literary equivalent of 的)/(subor. part.)/him/her/it
+14	来	1441611	14.5411986948	lai2	to come
+15	大	1414057	15.0874774537	da4/dai4	big/huge/large/major/great/wide/deep/oldest/eldest, doctor
+16	以	1410167	15.632253427	yi3	to use/according to/so as to/in order to/by/with/because/Israel (abbrev.)
+17	个	1390372	16.1693821924	ge4	(a measure word)/individual
+18	中	1383908	16.704013784	zhong1/zhong4	within/among/in/middle/center/while (doing sth)/during/China/Chinese, hit (the mark)
+19	上	1371195	17.2337340872	shang4	on/on top/upon/first (of two parts)/previous or last (week, etc.)/upper/higher/above/previous/to climb/to go into/above/to go up
+20	们	1233633	17.7103114134	men	(plural marker for pronouns and a few animate nouns)
+21	到	1122933	18.1441230953	dao4	to (a place)/until (a time)/up to/to go/to arrive
+22	说	1109652	18.5728040589	shui4/shuo1	persuade (politically), to speak/to say
+23	国	1104141	18.999356012	guo2	country/state/nation
+24	和	1088033	19.4196851195	he2/he4/huo2/huo4	and/together with/with/peace/harmony/union, cap (a poem)/respond in singing, soft/warm, mix together/to blend
+25	地	1068947	19.8326409201	de/di4	(subor. part. adverbial)/-ly, earth/ground/field/place/land
+26	也	1046455	20.2369076071	ye3	also/too
+27	子	1035711	20.63702367	zi3/zi	11 p.m.-1 a.m./1st earthly branch/child/midnight/son/child/seed/egg/small thing, (noun suff.)
+28	时	1024324	21.032740705	shi2	o'clock/time/when/hour/season/period
+29	道	975124	21.4094507871	dao4	direction/way/method/road/path/principle/truth/reason/skill/method/Tao (of Taoism)/a measure word/to say/to speak/to talk
+30	出	953481	21.7777997414	chu1	to go out/to come out/to occur/to produce/to go beyond/to rise/to put forth/to occur/to happen/(a measure word for dramas, plays, or operas)
+31	而	929477	22.136875466	er2	and/as well as/but (not)/yet (not)/(shows causal relation)/(shows change of state)/(shows contrast)
+32	要	923479	22.4936340422	yao1/yao4	demand/ask/request/coerce, important/vital/to want/to be going to/must
+33	于	899185	22.8410073558	yu2	(surname), in/at/to/from/by/than/out of
+34	就	896623	23.1873909172	jiu4	at once/then/right away/only/(emphasis)/to approach/to move towards/to undertake
+35	下	890602	23.5314484447	xia4	under/second (of two parts)/next (week, etc.)/lower/below/underneath/down(wards)/to decline/to go down/latter
+36	得	889089	23.8749214698	de2/de/dei3	obtain/get/gain/proper/suitable/proud/contented/allow/permit/ready/finished, a sentence particle used after a verb to show effect/degree or possibility, to have to/must/ought to/to need to
+37	可	882946	24.21602133	ke3	can/may/able to/certain(ly)/to suit/(particle used for emphasis)
+38	你	873080	24.5533097553	ni3	you
+39	年	856439	24.8841694264	nian2	year
+40	生	825031	25.2028955532	sheng1	to be born/to give birth/life/to grow
+41	自	805928	25.5142418056	zi4	from/self/oneself/since
+42	会	799450	25.8230854758	hui4/kuai4	can/be possible/be able to/to assemble/to meet/to gather/to see/union/group/association, to balance an account/accounting
+43	那	787003	26.1271206187	na3/na4/nei4	how/which, that/those, that/those/(sometimes used before a measure word, especially in Beijing)
+44	后	768948	26.4241807507	hou4	empress/queen/surname, back/behind/rear/afterwards/after/later
+45	能	757975	26.7170017913	neng2	can/may/capable/energy/able
+46	对	753470	27.0080824595	dui4	couple/pair/to be opposite/to oppose/to face/for/to/correct (answer)/to answer/to reply/to direct (towards sth)/right
+47	着	746931	27.29663698	zhao1/zhao2/zhe/zhu4/zhuo2	catch/receive/suffer, part. indicates the successful result of a verb/to touch/to come in contact with/to feel/to be affected by/to catch fire/to fall asleep/to burn, -ing part. (indicates an action in progress)/part. coverb-forming after some verbs, to make known/to show/to prove/to write/book/outstanding, to wear (clothes)/to contact/to use/to apply
+48	事	727218	27.5775759708	shi4	matter/thing/item/work/affair
+49	其	705736	27.8502160314	qi2	his/her/its/theirs/that/such/it (refers to sth preceding it)
+50	里	703578	28.122022413	li3	inside/internal/interior, village/within/inside, Chinese mile/neighborhood/li, a Chinese unit of length = one-half kilometer/hometown
+51	所	702060	28.3932423606	suo3	actually/place
+52	去	693796	28.6612697583	qu4	to go/to leave/to remove
+53	行	693612	28.929226073	hang2/xing2/xing4	a row/profession/professional, all right/capable/competent/OK/okay/to go/to do/to travel/temporary/to walk/to go/will do, behavior/conduct
+54	过	688510	29.1952113821	guo4	(experienced action marker)/to cross/to go over/to pass (time)/to celebrate (a holiday)/to live/to get along/(surname)/excessively/too-
+55	家	684994	29.4598383894	jia1	furniture/tool, -ist/-er/-ian/home/family/a person engaged in a certain art or profession
+56	十	642830	29.7081765926	shi2	ten/10
+57	用	631677	29.9522061668	yong4	to use
+58	发	628955	30.1951841774	fa1/fa4	to send out/to show (one's feeling)/to issue/to develop, hair
+59	天	625527	30.4368378825	tian1	day/sky/heaven
+60	如	624014	30.6779070851	ru2	as (if)/such as
+61	然	623602	30.9188171238	ran2	correct/right/so/thus/like this/-ly
+62	作	620223	31.1584217866	zuo4	to regard as/to take (somebody) for/to do/to make
+63	方	588952	31.3859458309	fang1	square/quadrilateral/direction/just
+64	成	586444	31.6125009842	cheng2/cheng4	finish/complete/accomplish/become/turn into/win/succeed/one tenth, finish/complete/accomplish/become/turn into/win/succeed/one tenth
+65	者	580331	31.8366945623	zhe3	-ist, -er (person)/person (who does sth)
+66	多	578867	32.0603225676	duo1	many/much/a lot of/numerous/multi-
+67	日	570839	32.2808491945	ri4	Japan/day/sun/date/day of the month
+68	都	566108	32.4995481406	dou1/du1	all/both (if two things are involved)/entirely (due to)each/even/already, (surname)/metropolis/capital city
+69	三	563056	32.7170680375	san1	three/3
+70	小	552432	32.9304836688	xiao3	small/tiny/few/young
