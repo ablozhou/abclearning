@@ -40,7 +40,7 @@ class log4py:
     def output(self, *fmt):
         for s in fmt:
             print s,
-        print '\n'
+        print ''
     
     def debug(self,*fmt):
         #print self.flag
@@ -55,9 +55,9 @@ class log4py:
         self.output(self._gettime(),'[INFO]',self.modulename,*fmt)
         
     def error(self,*fmt):
-        print '\033[0;30;41m',
+        #print '\033[0;30;41m',
         self.output(self._gettime(),'[ERROR]',self.modulename,*fmt)
-        print '\033[0m'
+        #print '\033[0m'
     def fatal(self,*fmt):
         self.output(self._gettime(),'[FATAL',self.modulename,*fmt)
         
