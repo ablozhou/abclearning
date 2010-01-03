@@ -5,6 +5,8 @@ import time
 #记忆曲线,5min,30min,12hour,1day,2days,4days,7days,15days
 REM_TIME=[300,1800,43200,86400,172800,345600,604800,1296000]
 
+ISOTIMEFORMAT = '%Y-%m-%d %X'
+
 class Memory():
     """
 一、 复习点的确定（根据艾宾浩斯记忆曲线制定）：
@@ -65,10 +67,10 @@ c) 一天都不能间断，坚持挺过这15天，之后每天都要花大约1�
 25.*list21-22
 26.*list23-24
     """
-    def __init__(self,familiar=0, lasttime = time.time()):
+    def __init__(self,familiar=0, lasttime = None):
         self.familiar = familiar
         self.strange = 0
-        self.lasttime = lasttime
+        self.setlasttime(lasttime)
         
         
     # -5,...,5 共11 等级 
@@ -83,9 +85,19 @@ c) 一天都不能间断，坚持挺过这15天，之后每天都要花大约1�
             
         return self.familiar
     
-    def setlasttime(self,lasttime = time.time()):
+    def setlasttime(self,lasttime = None):
+        if lasttime == None:
+            lasttime = time.time()
         self.lasttime = lasttime
-        
+    
+    def getlasttime(self):
+        return self.lasttime
+    
+    def strftime(self,ftime = None):
+        if ftime == None:
+            ftime = self.lasttime
+        return time.strftime(ISOTIMEFORMAT,time.localtime(ftime))    
+    
     def addstrange(self,count):
         
         self.strange += count
@@ -125,3 +137,12 @@ if __name__ == '__main__':
     else:
         
         print 'neednot review'
+        
+    while True:
+        t = raw_input('>> ')
+        mem.setlasttime()
+        if t == 'g':
+            mem.setlasttime()
+            zt = time.time()
+            print mem.strftime()
+            print 'zt:',mem.strftime(zt)
