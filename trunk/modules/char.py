@@ -4,6 +4,8 @@
 from memory import *
 import codecs
 
+
+
 class Char: #字，词
     def __init__(self,char):
         self.mem = Memory()
@@ -14,13 +16,16 @@ class Char: #字，词
         
        
     def display(self):
+    
         #print self.char,phonetic
-        if self.mem :
-            self.mem.addfamiliar(1)
-            self.mem.setlasttime()
-        print codecs.encode(self.char,'utf8'),self.freq,codecs.encode(self.phonetic,'utf8'),self.english
+        
+        self.mem.addfamiliar(1)
+        self.mem.setlasttime()
+        print codecs.encode(self.char,'utf8'),codecs.encode(self.phonetic,'utf8'),time.strftime(ISOTIMEFORMAT,time.localtime(self.mem.lasttime))
 
-
+    def addfamiliar(n):
+        self.mem.addfamiliar(n)
+        
         
 class CharDict:
     
