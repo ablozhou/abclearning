@@ -10,7 +10,7 @@
 10	他	1835410	12.1761388087	ta1	he/him
 11	这	1735712	12.846679386	zhe4/zhei4	this/these, this/these/(sometimes used before a measure word, especially in Beijing)
 12	为	1484873	13.420315795	wei2/wei4	act as/take...to be/to be/to do/to serve as/to become, because of/for/to
-13	之	1459824	13.9842752696	zhi1	(literary equivalent of 的)/(subor. part.)/him/her/it
+13	之	1459824	13.9842752696	zhi1	(literary equivalent of de)/(subor. part.)/him/her/it
 14	来	1441611	14.5411986948	lai2	to come
 15	大	1414057	15.0874774537	da4/dai4	big/huge/large/major/great/wide/deep/oldest/eldest, doctor
 16	以	1410167	15.632253427	yi3	to use/according to/so as to/in order to/by/with/because/Israel (abbrev.)

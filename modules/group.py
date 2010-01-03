@@ -1,108 +1,151 @@
 #!/bin/dev python
 # coding=utf8
 from log4py import *
-from hanzi import *
+from char import *
+import exceptions
 import memory
 import codecs
-log = log4py('group')
-class Group(memory.Memory):
-    def __init__(self,groupsize = 10, pagesize = 10, parent = None):
-        Memory.__init__(self)
-        self.curpoint = 0
+log = log4py('[group]')
+class OverflowException(Exception):
+    pass
+
+class Iter():
+    def __init__(self,maxsize):
         self.items = []
-        self.parent = parent
-        self.groupsize = groupsize
-        self.pagesize = pagesize
-        self._countpage = 0
-        #self._countpage = 0
+        self.maxsize = maxsize
+        
+    def __iter__(self):
+        self._cur = 0
+        return self
+    
+    def next(self):
+        if  self._cur < len(self.items):
+            it =  self.items[self._cur]
+            self._cur += 1
+            return it
+        else:
+            raise StopIteration
+        
+    def additem(self,item):
+            
+        if self.len() <= self.maxsize:
+            self.items.append(item)
+        else:
+            log.error('len is overflow:',self.len())
+            raise OverflowException         
+    
+        
+    def len(self):
+        return len(self.items)
     
     def getlastitem(self):
-        if len(self.items) == 0:
+        if self.len() == 0:
             return None
         return self.items[len(self.items)-1]
-    
-    def isfill(self):
-        lens = len(self.items)
-        if lens < groupsize:
-            return False
-        else:
-            if len(self.getlastitem()) == self.pagesize:
-                return True
-            return False
-            
         
-    def getemptyitem(self):
-        item = self.getlastitem()
-        if item == None or len(item.items) == self.pagesize :
-            if len(self.items) == self.groupsize:
-                return None
-            item = Page()
-            self.items.append(item)
-        
-        return item
-            
-    def additem(self,item):
-        
-        if self._countpage <= self.groupsize:
-            self.items.append(item)
-            self._countpage += 1
-            #if self.parent != None:
-            return 1    
-        else:
-            return -1 
 
-class Page(Group):
-    #def additem(self,item):
-    #    self.additem(item)
-    pass    
-class Groups():
+class Group(memory.Memory,Iter):
+    def __init__(self,maxsize, pagesize, parent = None):
+        Iter.__init__(self,maxsize)
+        Memory.__init__(self)
+        self.curpoint = 0
+        self.parent = parent
+        self.pagesize = pagesize
+        self._countpage = 0
+
+    
+    def isfull(self):
+        '''check group is full or not'''
+        #f=log.dbgfc('isfull')
+        lens = self.len()
+        log.debug('check group is full or not, group len = ',lens)
+        if lens < self.maxsize:
+            return False
+                
+        else:
+            log.debug('group lens == groupsize')
+            item = self.getlastitem()
+            if item == None: #should not be none
+                log.warn('item should not be none?')
+                return False
+
+            if item.isfull():
+                return True
+            else:
+                return False
+            
+        
+    def getemptypage(self):
+        #f=log.dbgfc('getemptypage')
+        if self.isfull():
+            log.warn('getemptypage, group is full,return None')
+            return None
+        
+        page = self.getlastitem()
+        if page == None or page.isfull():
+            log.debug('page is None or full, new a page')
+            page = Page(self.pagesize,self)
+            self.additem(page)
+         
+        return page
+            
+
+
+class Page(Iter):
+    def __init__(self,maxsize,parent):
+        Iter.__init__(self,maxsize)
+        self.parent = parent
+            
+    def isfull(self):
+        if self.len() == self.maxsize:
+            return True
+        else:
+            return False
+        
+    def display(self):
+        for item in self:
+            item.display()
+            
+class Groups(Iter):
     def __init__(self,groupsize=10,pagesize=10):
+        
+        Iter.__init__(self,99999)
         ''' groupsize 组内包含多少item
-        groupsize 页内包含多少对象
+        pagesize 页内包含多少对象
         '''
         self.groupsize = groupsize
         self.pagesize = pagesize
         self.curgroup = 0
-        self.curitem = 0
-        self.maxgroups = 0
-        self.groups=[] #
-        self._countgroup = 0
-        self._countitem = 0
-        self._group = None
-        self._item = None
+        self.curpage = 0
+        self.dict = CharDict()
+        
         
     def getlastgroup(self):
-        if len(self.groups) == 0:
-            return None
-        return self.groups[len(self.groups)-1]
+        return self.getlastitem()
     
     def getemptygroup(self):
+        #f=log.dbgfc('getemptygroup')
         group = self.getlastgroup()
-        if group == None:
-            group = Group()
-            self.groups.append(group)
-        # 如果组内页数等于最大值，判断最后一个页是否填满
-        # 如果填满，新建group，如果没满，继续填    
-        if len(group.items) == self.groupsize:
-            if group.isfull():
-                group = Group()
-                self.groups.append(group)
+        if group == None or group.isfull():
+            log.debug('group is none or full,Init a group')
+            group = Group(self.groupsize,self.pagesize,self)
+            self.additem(group)
         
         return group
             
             
-    def additem(self,item):
-        ''' 如果group为空，创建group,加入groups;
-        如果group 满了，则将group 置空
-        如果item 为空，创建item，并加入group
-        如果item 满了，则将item置空
-        item 是基本单位
+    def addunit(self,unit):
+        ''' unit是基本单位。如果group为空，创建group,加入groups;
+        如果page为空，创建page，并加入group
         '''
         group =  self.getemptygroup()
-        page = group.getemptyitem()
+        page = group.getemptypage()
         
-        page.additem(item)
-        log.debug('countitem = ',self._countitem,'countitem = ',self._countitem)
+        try:
+            page.additem(unit)
+            self.dict.addchar(unit)
+        except OverflowException:
+            log.error('page error over flow')
         
     def open(self,file):
         splitline = []
@@ -117,20 +160,27 @@ class Groups():
             splitline = line.split('\t',5)
             #log.debug(splitline)
             char = Char(splitline[1])
-            char.setfreq(int(splitline[2]))
-            char.setpinyin(splitline[4])
-            char.english=splitline[5]
-            
-            self.additem(char)
+            char.freq = int(splitline[2])
+            char.phonetic = splitline[4]
+            char.english = splitline[5]
+            #char.printhz()
+            try:
+                self.addunit(char)
+            except OverflowException:
+                log.error('overflow exception')    
         
         f.close()        
         return True
     
     def getgroup(self,groupid):
+        log.debug('groupid=',groupid)
         if len(self.groups) == 0:
             return None
         return self.groups[groupid]
     
+    def getnextgroup(self):
+        log.debug('current group=',self.curgroup)
+        
     def getgroups(self,groupidstart,groupidend):
         return self.groups[groupidstart:groupidend]
     
@@ -140,15 +190,29 @@ class Groups():
             return None
         group = self.getgroup(groupid)
         return group.items[itemid]
+    
+    def walk(self):
+        i = 0
         
-            
+        for group in self:
+            i = i+1
+            log.debug('group',i)
+            j=0
+            for page in group:
+                j = j+1
+                log.debug('page ',j)
+                for char in page:
+                    char.display()
+                    #print codecs.encode(char.char,'utf8')
+                    #print codecs.encode(char.hanzi,'utf8'),char.freq,char.pinyin ,char.english
+
 #todo 需要将要背诵的对象分组，用next方法来显示，初始化分组    
 
 #unit test
 if __name__ == '__main__':
-    gs = Groups(11,4)
+    gs = Groups(2,2)
     gs.open('../data/freq_part.txt')
-    group = gs.getgroup(1)
+    '''group = gs.getgroup(1)
     for item in group.items:
         for char in item.items:
             print codecs.encode(char.hanzi,'utf8'),char.freq,char.pinyin ,char.english
@@ -156,4 +220,5 @@ if __name__ == '__main__':
     item1 = gs.getitem(1,5)
     for char in item1.items:
         print codecs.encode(char.hanzi,'utf8'),char.freq,char.pinyin ,char.english
-             
+       '''
+    gs.walk()      
