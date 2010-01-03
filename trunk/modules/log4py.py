@@ -27,13 +27,31 @@ import datetime
 
 dest = {1:'stdout',2:'stderr',3:'file'}  #stdout
 logs = ['info','debug','warn','error','fatal']
+#logs = []
 class log4py:
     def __init__(self,modulename='gloabal',flag=logs,filename='log4py.txt'):
         self.filename = filename
         self.flag=flag
         self.modulename = modulename
+        self.fcname = None
+
+    class function():
+        def __init__(self,fcname,parent):
+            parent.debug('enter ',fcname)
+            self.fcname = fcname
+            self.parent = parent
+        def __del__(self):
+            self.parent.debug('exit ',self.fcname)
         
-    
+    def dbgfc(self,fcname):
+        '''set debug function name'''
+        f = None
+        if 'debug' in self.flag:
+            
+            f = self.function(fcname,self)
+        return f
+        
+        
     def _gettime(self):
         return datetime.datetime.now().isoformat()
     #flag = INFO,DEBUG,WARNING,ERROR,FATAL
