@@ -5,7 +5,7 @@ from char import *
 import exceptions
 import memory
 import codecs
-log = log4py('[group]')
+log = log4py.log4py('[group]')
 class OverflowException(Exception):
     pass
 
@@ -106,6 +106,12 @@ class Page(Iter):
         for item in self:
             item.display()
             
+    def getstr(self):
+        str = ''
+        for item in self:
+            str += item.display()
+        return str
+            
 class Groups(Iter):
     def __init__(self,groupsize=10,pagesize=10):
         
@@ -146,7 +152,11 @@ class Groups(Iter):
             self.dict.addchar(unit)
         except OverflowException:
             log.error('page error over flow')
-        
+    
+    def getunit(self,unit):
+        a = self.dict[unit]
+        return a
+    
     def open(self,file):
         splitline = []
         f=codecs.open(file, 'r','utf8')

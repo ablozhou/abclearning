@@ -52,3 +52,11 @@ if __name__ == '__main__':
             g = iter(gs)
             group = g.next()
             p = iter(group)
+            
+        else:
+            #TODO: 判断无效输入
+            if(cmd != None and cmd != ''):
+                c = cmd.decode('utf8')
+                char = gs.getunit(c)
+                char.display()
+        
