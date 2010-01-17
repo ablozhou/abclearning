@@ -3,7 +3,6 @@
 
 import wx
 import sys
-sys.path.append('/home/zhouhh/abclearning')
 import modules.group
 #import modules.char
 

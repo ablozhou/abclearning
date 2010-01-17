@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<resource version="2.3.0.1">
+  <object class="wxFrame" name="idf_main">
+    <centered>1</centered>
+    <style>wxDEFAULT_FRAME_STYLE</style>
+    <title>IDL Job Manager</title>
+    <object class="wxBoxSizer">
+      <orient>wxHORIZONTAL</orient>
+      <object class="sizeritem">
+        <object class="wxSplitterWindow" name="idc_main_splitter">
+          <object class="wxSplitterWindow" name="idc_splitter_twobar">
+            <orientation>vertical</orientation>
+            <minsize>1</minsize>
+            <style>wxSP_3D|wxSP_BORDER</style>
+            <object class="wxNotebook" name="idc_twobar_leftbar">
+              <usenotebooksizer>1</usenotebooksizer>
+              <object class="notebookpage">
+                <label>Jobs</label>
+                <object class="wxPanel" name="idc_leftbar_jobs">
+                  <style>wxTAB_TRAVERSAL</style>
+                  <object class="wxBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxListCtrl" name="idc_jobs_list1">
+                        <style>wxLC_REPORT</style>
+                      </object>
+                      <option>1</option>
+                      <flag>wxEXPAND</flag>
+                    </object>
+                  </object>
+                </object>
+                <selected>1</selected>
+              </object>
+              <object class="notebookpage">
+                <label>Hosts</label>
+                <object class="wxPanel" name="idc_leftbar_hosts">
+                  <style>wxTAB_TRAVERSAL</style>
+                  <object class="wxBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxListCtrl" name="idc_hosts_list1">
+                        <style>wxLC_REPORT</style>
+                      </object>
+                      <option>1</option>
+                      <flag>wxEXPAND</flag>
+                    </object>
+                  </object>
+                </object>
+              </object>
+            </object>
+            <object class="wxNotebook" name="idc_twobar_rightbar">
+              <usenotebooksizer>1</usenotebooksizer>
+              <object class="notebookpage">
+                <label>Jobs</label>
+                <object class="wxPanel" name="idc_rightbar_jobs">
+                  <style>wxTAB_TRAVERSAL</style>
+                  <object class="wxBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxListCtrl" name="idc_jobs_list2">
+                        <style>wxLC_REPORT</style>
+                      </object>
+                      <option>1</option>
+                      <flag>wxEXPAND</flag>
+                    </object>
+                  </object>
+                </object>
+                <selected>1</selected>
+              </object>
+              <object class="notebookpage">
+                <label>Hosts</label>
+                <object class="wxPanel" name="idc_rightbar_hosts">
+                  <style>wxTAB_TRAVERSAL</style>
+                  <object class="wxBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxListCtrl" name="idc_hosts_list2">
+                        <style>wxLC_REPORT</style>
+                      </object>
+                      <option>1</option>
+                      <flag>wxEXPAND</flag>
+                    </object>
+                  </object>
+                </object>
+              </object>
+            </object>
+          </object>
+          <object class="wxNotebook" name="idc_main_status">
+            <usenotebooksizer>1</usenotebooksizer>
+            <object class="notebookpage">
+              <label>Details</label>
+              <object class="wxPanel" name="idc_status_details">
+                <style>wxTAB_TRAVERSAL</style>
+                <object class="wxBoxSizer">
+                  <orient>wxVERTICAL</orient>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="idc_status_txt">
+                      <style>wxTE_MULTILINE|wxTE_READONLY</style>
+                    </object>
+                    <option>1</option>
+                    <flag>wxEXPAND</flag>
+                  </object>
+                </object>
+              </object>
+              <selected>1</selected>
+            </object>
+            <object class="notebookpage">
+              <label>Output</label>
+              <object class="wxPanel" name="idc_status_output">
+                <style>wxTAB_TRAVERSAL</style>
+                <object class="wxBoxSizer">
+                  <orient>wxVERTICAL</orient>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="idc_output_txt">
+                      <style>wxTE_MULTILINE|wxTE_READONLY</style>
+                    </object>
+                    <option>1</option>
+                    <flag>wxEXPAND</flag>
+                  </object>
+                </object>
+              </object>
+            </object>
+            <object class="notebookpage">
+              <label>Errors</label>
+              <object class="wxPanel" name="idc_status_errors">
+                <style>wxTAB_TRAVERSAL</style>
+                <object class="wxBoxSizer">
+                  <orient>wxVERTICAL</orient>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="idc_errors_txt">
+                      <style>wxTE_MULTILINE|wxTE_READONLY</style>
+                    </object>
+                    <option>1</option>
+                    <flag>wxEXPAND</flag>
+                  </object>
+                </object>
+              </object>
+            </object>
+            <style>wxNB_BOTTOM</style>
+            <object class="notebookpage">
+              <label>Master</label>
+              <object class="wxPanel" name="idc_status_master">
+                <style>wxTAB_TRAVERSAL</style>
+                <object class="wxBoxSizer">
+                  <orient>wxVERTICAL</orient>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="idc_master_txt">
+                      <style>wxTE_MULTILINE|wxTE_READONLY</style>
+                    </object>
+                    <option>1</option>
+                    <flag>wxEXPAND</flag>
+                  </object>
+                </object>
+              </object>
+            </object>
+          </object>
+          <orientation>horizontal</orientation>
+          <size>400,300</size>
+          <style>wxSP_3D|wxSP_BORDER</style>
+        </object>
+        <option>1</option>
+        <flag>wxEXPAND</flag>
+      </object>
+    </object>
+  </object>
+  <object class="wxMenuBar" name="idc_main_menubar">
+    <object class="wxMenu" name="idm_main_file">
+      <label>_File</label>
+      <object class="wxMenuItem" name="idm_main_new">
+        <label>_New</label>
+      </object>
+      <object class="separator"/>
+      <object class="wxMenuItem" name="idm_main_exit">
+        <label>E_xit</label>
+      </object>
+    </object>
+    <object class="wxMenu" name="idm_main_admin">
+      <label>_Admin</label>
+      <object class="wxMenuItem" name="idm_main_run_queue">
+        <label>_Run Queue</label>
+      </object>
+      <object class="wxMenuItem" name="idm_main_pause_queue">
+        <label>_Pause Queue</label>
+      </object>
+      <object class="wxMenuItem" name="idm_main_resume_queue">
+        <label>Resu_me Queue</label>
+      </object>
+      <object class="separator"/>
+      <object class="wxMenuItem" name="idm_main_options">
+        <label>_Options</label>
+      </object>
+      <object class="separator"/>
+      <object class="wxMenuItem" name="idm_main_login">
+        <label>_Login...</label>
+      </object>
+      <object class="wxMenuItem" name="idm_main_logout">
+        <label>Lo_gout</label>
+      </object>
+    </object>
+    <object class="wxMenu" name="idm_main_job">
+      <label>_Job</label>
+      <object class="wxMenuItem" name="idm_main_submit_job">
+        <label>_Submit Job</label>
+      </object>
+      <object class="wxMenuItem" name="idm_main_suspend_job">
+        <label>Sus_pend Job</label>
+      </object>
+      <object class="wxMenuItem" name="idm_main_resume_job">
+        <label>Resu_me Job</label>
+      </object>
+      <object class="wxMenuItem" name="idm_main_cancel_job">
+        <label>_CancelJob</label>
+      </object>
+    </object>
+    <object class="wxMenu" name="idm_main_show">
+      <label>Sho_w</label>
+      <object class="wxMenuItem" name="idm_main_refresh">
+        <label>_Refresh</label>
+      </object>
+      <object class="separator"/>
+      <object class="wxMenuItem" name="idm_main_vertical">
+        <label>_Vertical Arrangement</label>
+      </object>
+    </object>
+    <object class="wxMenu" name="idm_main_help">
+      <label>_Help</label>
+      <object class="wxMenuItem" name="idm_main_index">
+        <label>_Index</label>
+      </object>
+      <object class="separator"/>
+      <object class="wxMenuItem" name="idm_main_about">
+        <label>_About ...</label>
+      </object>
+    </object>
+    <style>wxMB_DOCKABLE</style>
+  </object>
+  <object class="wxToolBar" name="idc_main_toolbar">
+    <style>wxTB_DOCKABLE|wxTB_DOCKABLE|wxTB_3DBUTTONS|wxTB_HORIZONTAL</style>
+    <object class="tool" name="idc_toolbar_new">
+      <label>&amp;New</label>
+      <tooltip>New Job</tooltip>
+      <longhelp>New Job</longhelp>
+      <bitmap stock_id="wxART_FILE_OPEN"></bitmap>
+      <bitmap2 stock_id="wxART_FILE_OPEN"></bitmap2>
+    </object>
+  </object>
+  <object class="wxDialog" name="idd_new">
+    <title>New Job</title>
+    <centered>1</centered>
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxBoxSizer">
+          <orient>wxVERTICAL</orient>
+          <object class="sizeritem">
+            <object class="wxNotebook" name="idc_new_cat">
+              <usenotebooksizer>1</usenotebooksizer>
+              <object class="notebookpage">
+                <label>Text Mode</label>
+                <object class="wxPanel" name="idc_cat_textmode">
+                  <style>wxTAB_TRAVERSAL</style>
+                  <object class="wxBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxTextCtrl" name="idc_textmode_txt">
+                        <value>resize -v2 -i L:/images/Kyle/Nasa1 -i L:/images/Kyle/Violin w=512 h=389</value>
+                        <size>200,100</size>
+                        <style>wxTE_MULTILINE</style>
+                      </object>
+                      <option>1</option>
+                      <flag>wxEXPAND</flag>
+                    </object>
+                  </object>
+                </object>
+                <selected>1</selected>
+              </object>
+              <object class="notebookpage">
+                <label>category1</label>
+                <object class="wxPanel" name="idc_cat_category1">
+                  <style>wxTAB_TRAVERSAL</style>
+                  <object class="wxBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <object class="sizeritem">
+                      <object class="wxBoxSizer">
+                        <orient>wxHORIZONTAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxStaticText">
+                            <label>Option1:</label>
+                          </object>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxTextCtrl">
+                            <value>value</value>
+                          </object>
+                          <border>0</border>
+                        </object>
+                      </object>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxBoxSizer">
+                        <orient>wxHORIZONTAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxStaticText">
+                            <label>Option1:</label>
+                          </object>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxTextCtrl">
+                            <value>value</value>
+                          </object>
+                        </object>
+                      </object>
+                    </object>
+                    <object class="sizeritem">
+                      <object class="wxBoxSizer">
+                        <orient>wxHORIZONTAL</orient>
+                        <object class="sizeritem">
+                          <object class="wxStaticText">
+                            <label>Option1:</label>
+                          </object>
+                        </object>
+                        <object class="sizeritem">
+                          <object class="wxTextCtrl">
+                            <value>value</value>
+                          </object>
+                        </object>
+                      </object>
+                    </object>
+                  </object>
+                </object>
+                <selected>1</selected>
+              </object>
+              <object class="notebookpage">
+                <label>category2</label>
+                <object class="wxPanel" name="idc_cat_category2">
+                  <style>wxTAB_TRAVERSAL</style>
+                  <object class="wxBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                  </object>
+                </object>
+                <selected>1</selected>
+              </object>
+            </object>
+            <option>1</option>
+            <flag>wxEXPAND</flag>
+          </object>
+        </object>
+        <option>1</option>
+        <flag>wxEXPAND</flag>
+      </object>
+      <object class="sizeritem">
+        <object class="wxStaticBoxSizer">
+          <label>General</label>
+          <orient>wxVERTICAL</orient>
+          <object class="sizeritem">
+            <object class="wxBoxSizer">
+              <orient>wxVERTICAL</orient>
+              <object class="sizeritem">
+                <object class="wxGridSizer">
+                  <cols>2</cols>
+                  <object class="sizeritem">
+                    <object class="wxStaticText">
+                      <label>Job Name:</label>
+                    </object>
+                    <flag>wxRIGHT</flag>
+                    <border>5</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="idc_new_jobname">
+                      <value>NEWJOB1</value>
+                    </object>
+                    <flag>wxALL|wxEXPAND</flag>
+                    <border>0</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxStaticText">
+                      <label>Owner:</label>
+                    </object>
+                    <flag>wxRIGHT</flag>
+                    <border>5</border>
+                  </object>
+                  <object class="sizeritem">
+                    <object class="wxTextCtrl" name="idc_new_owner">
+                      <value>NEWOWNER1</value>
+                    </object>
+                    <flag>wxALL|wxEXPAND</flag>
+                    <border>0</border>
+                  </object>
+                  <vgap>2</vgap>
+                </object>
+                <flag>wxEXPAND</flag>
+              </object>
+              <object class="sizeritem">
+                <object class="wxCheckBox" name="idc_new_runnow">
+                  <label>Submit Job &amp;Immediately</label>
+                  <checked>1</checked>
+                </object>
+                <flag>wxEXPAND</flag>
+                <border>5</border>
+              </object>
+            </object>
+          </object>
+        </object>
+        <flag>wxEXPAND</flag>
+      </object>
+      <object class="sizeritem">
+        <object class="wxStaticLine"/>
+        <flag>wxEXPAND</flag>
+      </object>
+      <object class="sizeritem">
+        <object class="wxBoxSizer">
+          <orient>wxHORIZONTAL</orient>
+          <object class="sizeritem">
+            <object class="wxButton" name="idc_new_ok">
+              <label>&amp;OK</label>
+              <default>1</default>
+            </object>
+            <flag>wxRIGHT</flag>
+            <border>10</border>
+          </object>
+          <object class="sizeritem">
+            <object class="wxButton" name="idc_new_cancel">
+              <label>&amp;Cancel</label>
+            </object>
+            <flag>wxRIGHT</flag>
+            <border>10</border>
+          </object>
+          <object class="sizeritem">
+            <object class="wxButton" name="idc_new_apply">
+              <label>&amp;Apply</label>
+            </object>
+            <flag>wxRIGHT</flag>
+            <border>10</border>
+          </object>
+        </object>
+        <flag>wxALL|wxALIGN_CENTRE_HORIZONTAL</flag>
+        <border>10</border>
+      </object>
+    </object>
+    <style>wxDEFAULT_DIALOG_STYLE</style>
+  </object>
+</resource>

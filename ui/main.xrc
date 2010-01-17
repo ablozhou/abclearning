@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource class="wxButton">
+  <object class="wxFrame" name="mframe">
+    <object class="wxBoxSizer">
+      <orient>wxVERTICAL</orient>
+      <object class="sizeritem">
+        <object class="wxBoxSizer">
+          <orient>wxHORIZONTAL</orient>
+          <object class="sizeritem">
+            <object class="wxTextCtrl" name="txtsearch">
+              <size>300,18</size>
+            </object>
+            <option>1</option>
+            <flag>wxEXPAND</flag>
+            <border>2</border>
+          </object>
+          <object class="sizeritem">
+            <object class="wxButton" name="btnsearch">
+              <label>&amp;Search</label>
+              <XRCED>
+                <events>EVT_BUTTON</events>
+              </XRCED>
+            </object>
+            <option>0</option>
+            <flag>wxEXPAND</flag>
+            <border>1</border>
+          </object>
+        </object>
+      </object>
+      <object class="sizeritem">
+        <object class="wxBoxSizer">
+          <orient>wxHORIZONTAL</orient>
+          <object class="sizeritem">
+            <object class="wxTextCtrl" name="txtmain">
+              <size>300,300</size>
+              <value>hello,ABC</value>
+              <style>wxTE_AUTO_SCROLL|wxTE_MULTILINE</style>
+            </object>
+            <option>4</option>
+            <flag>wxEXPAND</flag>
+            <border>4</border>
+          </object>
+          <object class="sizeritem">
+            <object class="wxBoxSizer">
+              <orient>wxVERTICAL</orient>
+              <object class="sizeritem">
+                <object class="wxButton" name="btn_next">
+                  <label>&amp;Next</label>
+                  <XRCED>
+                    <events>EVT_BUTTON|EVT_KEY_DOWN</events>
+                    <assign_var>1</assign_var>
+                  </XRCED>
+                </object>
+              </object>
+            </object>
+          </object>
+        </object>
+      </object>
+    </object>
+    <title>I Love ABC</title>
+  </object>
+</resource>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource class="wxButton">
+  <object class="wxFrame" name="zframe">
+    <object class="wxBoxSizer">
+      <orient>wxHORIZONTAL</orient>
+      <object class="sizeritem">
+        <object class="wxTextCtrl" name="txt_main">
+          <size>300,300</size>
+          <value>hello</value>
+          <style>wxTE_AUTO_SCROLL|wxTE_MULTILINE</style>
+        </object>
+        <option>4</option>
+        <flag>wxEXPAND</flag>
+        <border>2</border>
+      </object>
+      <object class="sizeritem">
+        <object class="wxBoxSizer">
+          <orient>wxVERTICAL</orient>
+          <object class="sizeritem">
+            <object class="wxButton" name="btn_next">
+              <label>下一个</label>
+              <XRCED>
+                <events>EVT_BUTTON|EVT_KEY_DOWN</events>
+                <assign_var>1</assign_var>
+              </XRCED>
+            </object>
+          </object>
+        </object>
+      </object>
+    </object>
+    <title>你好</title>
+  </object>
+</resource>
