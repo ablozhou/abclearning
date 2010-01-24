@@ -5,6 +5,7 @@ import modules.log4py as log4py
 import modules.char as char
 import codecs
 import string
+import cPickle as pk
 '''
 0x4E00-0x9FFF       CJK 统一字型               常用字          共 20992个（实际只定义到0x9FC3)
 0x3400-0x4DFF       CJK 统一字型扩展表A     少用字   共 6656个
@@ -16,8 +17,20 @@ dict={}
 spaces=['',' ','\t','\n']
 hzlist=[]
 
+#持久性 序列化
+#fpk=file('../data/hz.dat','wb')
+#pk.dump(hzlist,fpk,True)
+#pk.dump(dict,fpk,True)    
+#fpk.close()
+#
+#fpk1 = file('../data/hz.dat','rb')
+#hzlist1 = pk.load(fpk1)
+#dict1=pk.load(fpk1)
+#fpk1.close()
+
+
 #unicode hanzi
-for hz in xrange(0x4E00,0xA000):
+'''for hz in xrange(0x4E00,0xA000):
     hz = unichr(hz)
     ch = char.Char(hz)
     dict[hz]=ch
@@ -47,17 +60,17 @@ for hz in xrange(0x2F800,0x2FA20):
     dict[hz]=ch
     hzlist.append(hz)
 print hex(ord(hz))
-
+'''
 
 log = log4py.log4py('[unihan]')
-file = '../data/Unihandata.txt'
+file_src = '../data/Unihandata.txt'
 file_write='../data/unihan.txt'
 splitline = []
 
-f=codecs.open(file, 'r','utf8')
+f=codecs.open(file_src, 'r','utf8')
 fw = codecs.open(file_write, 'w+','utf8')
 if not f: 
-    log.debug('error ,cannot open file %s' % file)
+    log.debug('error ,cannot open file %s' % file_src)
     exit(-1) 
 
 lines = f.read().split('\n')
@@ -99,18 +112,20 @@ for line in lines:
             ch.addlang(langch)
             
         t = phonetic.split(' ')
-        #print t
-        ch.addphonetic('/'.join(t))
+        print t
+        ch.addphonetic('py:'+'/'.join(t))
         
     elif key == 'kHanyuPinyin':
         langch = ch.getlang(char.Chinese)
         if langch == None:
             langch = char.Language(char.Chinese)
             ch.addlang(langch)
-                    
-        p = phonetic.split(':')
-        t = p[1].split(',')
-        ch.addphonetic('/'.join(t))
+        z = phonetic.split(' ')
+        t=[]
+        for p in z:
+            s = p.split(':')
+            t += s[1].split(',')
+        ch.addphonetic('py:'+'/'.join(t))
     
     elif key == 'kXHC1983':
         langch = ch.getlang(char.Chinese)
@@ -123,7 +138,7 @@ for line in lines:
         for p1 in p:
             c = p1.split(':')
             t.append(c[1])
-        ch.addphonetic('/'.join(t))
+        ch.addphonetic('py:'+'/'.join(t))
     
     elif key == 'kCantonese':
         #广东话
@@ -175,12 +190,19 @@ for line in lines:
             ch.addlang(langviet)
             
         ch.addphonetic('Viet:'.decode('utf8')+phonetic,char.Vietnamese,char.Vietnamese)
-    
-        #print ch.phonetic.encode('utf8')
-    #ch.display()
-    #if i > 100:
-    #    break
-i=0    
+
+
+#持久性 序列化
+#fpk = file('../data/hz.dat','wb')
+#pk.dump(hzlist,fpk,True)
+#pk.dump(dict,fpk,True)    
+#fpk.close()
+#
+#fpk1 = file('../data/hz.dat','rb')
+#hzlist1 = pk.load(fpk1)
+#dict1=pk.load(fpk1)
+#fpk1.close()
+  
 for hz in hzlist:
     i +=1
     ch = dict[hz]
@@ -197,6 +219,5 @@ for hz in hzlist:
     fw.write(p)
     fw.write('\n')
     
-    
-    
+
 fw.close()
