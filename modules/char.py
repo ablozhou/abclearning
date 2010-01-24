@@ -8,62 +8,49 @@ import modules.log4py as log4py
 
 log = log4py.log4py('[Char]')
 
-class Char: #字，词
-    def __init__(self,char):
-        self.mem = Memory()
-        self.char=char
-        self.freq=1
-        self.phonetic='' #拼音 phonetic symbols
-        self.stroknum=1 #笔画 number of strokes
-        
-    def getphonetic(self):
-        p = phonetic(self.phonetic.encode('utf8'))
-        return p.getphonetic()
 
-    def getaphonetic(self):
-        p = phonetic(self.phonetic.encode('utf8'))
-        return p.getaphonetic()
-
-       
-    def display(self,*format, **format2):
+Chinese = 1
+   
+Japanese = 3
     
-        #print self.char,phonetic
-        self.mem.addfamiliar(1)
-        self.mem.setlasttime()
-        #phonetic = codecs.encode(self.char,'utf8')+codecs.encode(self.phonetic,'utf8'),time.strftime(ISOTIMEFORMAT,time.localtime(self.mem.lasttime))
-        phonetic = self.char + self.phonetic
-        print phonetic.encode('utf8')
-        
-        return phonetic
-    
-    def addfamiliar(n):
-        self.mem.addfamiliar(n)
-    
+Korean=5
+Vietnamese = 6
+English = 8
 
-class phonetic():
-    def __init__(self, phonetic):
-        self.phonetic = self.proc_phonetic(phonetic)
-    #TODO 重载如何进行？
-#    def getphonetic(self,phonetic):
-#        p = phonetic.strip();
-#            space = [' ', '\n', '\t']
-#            for c in p:
-#                if c == u'-' or c in space:
-#            	continue
-#                if c in string.letters:
-#            	continue
-#                if c in string.digits:
-#            	continue
-#                ret = find_it(c.encode('utf-8'), lines)
-#                if ret:
-#            	result.append(c+':'+'/'.join(ret))
+#sublang 
+Mandarin = 11
+Cantonese = 12 
+JapaneseOn = 31
+JapaneseKun = 32
 
-    #多音字显示全部拼音
+Hangul = 51
+Korean_roman = 52
+
+Us_en = 81
+Eng_en = 82
+
+class Phonetic():
+    def __init__(self,phonetic,sublang = Mandarin, language = Chinese ):
+        self.language = language
+        self.sublang = sublang
+        self.setphonetic(phonetic,sublang,language)
+    
+    def setphonetic(self,phonetic,sublang = Mandarin, language = Chinese):
+        if self.sublang == Mandarin:
+            self.phonetic = self.proc_phonetic(phonetic)
+        else:
+            self.phonetic = phonetic            
+    #定位多音字的词，读音，第几个字的读音,避免重复，如“数数"
+    def setmulphone(self,word,phonetic,num):
+        pass
+    
+    #todo 处理多音字
+    def getaphonetic(self,word = None,num = None):
+        p = phonetic.split('/')
+        return p[0]
+    
     def getphonetic(self):
         return self.phonetic
-    #多音字只显示一个拼音
-    def getaphonetic(self):
-        return self.phonetic.split('/')[0]    
     #兼容多音字处理                    
     def proc_phonetic(self,phonetic):
         phonetics = phonetic.split('/')
@@ -77,41 +64,184 @@ class phonetic():
     def proc_singleph(self,phonetic,tone = None):
         
         if tone == None:
-            tone = string.join(phonetic[-1:],'')
+            try:
+                tone = int(phonetic[-1:])
+            except ValueError:
+                return phonetic
             phonetic = string.join(phonetic[:-1],'')
-            
-        if tone not in ('1234'):
+        #5 neutral tone    
+        if tone not in range(1,5):
             return phonetic
         
-        ph_a = ['ā', 'á', 'ǎ', 'à']
-        ph_o = ['ō', 'ó', 'ǒ', 'ò']
-        ph_e = ['ē', 'é', 'ě', 'è']
-        ph_i = ['ī', 'í', 'ǐ', 'ì']
-        ph_u = ['ū', 'ú', 'ǔ', 'ù']
-        ph_v = ['ǖ', 'ǘ', 'ǚ', 'ǜ']
-        #ph_A = ['Ā', 'Á', 'Ǎ', 'À']
-        #ph_O = ['Ō', 'Ó', 'Ǒ', 'Ò']
-        #ph_E = ['Ē', 'É', 'Ě', 'È']
+        a = ['ā', 'á', 'ǎ', 'à']
+        o = ['ō', 'ó', 'ǒ', 'ò']
+        e = ['ē', 'é', 'ě', 'è']
+        i = ['ī',  'í', 'ǐ', 'ì']
+        u = ['ū', 'ú', 'ǔ', 'ù']
+        v = ['ǖ', 'ǘ', 'ǚ', 'ǜ']
+        A = ['Ā', 'Á', 'Ǎ', 'À']
+        O = ['Ō', 'Ó', 'Ǒ', 'Ò']
+        E = ['Ē', 'É', 'Ě', 'È']
+        
         if 'iu' in phonetic:
-            return string.replace(phonetic,'u',ph_u[int(tone)-1],maxsplit=1)
+            return phonetic.replace('u',u[tone-1].decode('utf8'),1)
         if 'ui' in phonetic:
-            return string.replace(phonetic,'i',ph_i[int(tone)-1],maxsplit=1)
+            return phonetic.replace('i',i[tone-1].decode('utf8'),1)
         if 'a' in phonetic:
-            return string.replace(phonetic,'a',ph_a[int(tone)-1],maxsplit=1)
+            return phonetic.replace('a',a[tone-1].decode('utf8'),1)
         if 'o' in phonetic:
             log.debug(phonetic)
-            return string.replace(phonetic,'o',ph_o[int(tone)-1],maxsplit=1)
+            return phonetic.replace('o',o[tone-1].decode('utf8'),1)
         if 'e' in phonetic:
-            return string.replace(phonetic,'e',ph_e[int(tone)-1],maxsplit=1)
+            return phonetic.replace('e',e[tone-1].decode('utf8'),1)
         if 'i' in phonetic :
-            return string.replace(phonetic,'i',ph_i[int(tone)-1],maxsplit=1)
+            return phonetic.replace('i',i[tone-1].decode('utf8'),1)
         if 'u' in phonetic:
-            return string.replace(phonetic,'u',ph_u[int(tone)-1],maxsplit=1)
+            return phonetic.replace('u',u[tone-1].decode('utf8'),1)
         if 'v' in phonetic:
-            return string.replace(phonetic,'v',ph_v[int(tone)-1],maxsplit=1)
+            return phonetic.replace('v',v[tone-1].decode('utf8'),1)
     
         return phonetic    
         
+class Meaning():
+    def __init__(self,language):
+        self.language = language
+        self.meaning = meaning
+        #self.sublang = sublang
+
+class Language():
+    def __init__(self,language):
+        self.language = language
+        self.phonetic={} #读音 phonetic symbols，languae:phonetic
+        self.meaning=[] #释义 language:meaning
+    #增加解释    
+    def addgloss(self,meaning):
+        self.meaning.append(meaning)
+    
+    def getgloss(self):
+        return ''.join(self.meaning)
+    
+    #增加拼音    
+    def addphonetic(self,phonetic,sublang = Mandarin, language = Chinese):
+        try:
+            po = self.phonetic[sublang]
+        except KeyError:
+            po = Phonetic(phonetic,sublang,language)
+            self.phonetic[po.sublang] = po
+
+        plist = po.getphonetic().split('/')
+            
+        new_plist = phonetic.split('/')
+        if len(plist) < len(new_plist):
+            po.setphonetic(phonetic,sublang,language)
+            
+        
+#    def getphone_sublang(self,sublang = Mandarin):
+#        try:
+#            p =  self.phonetic[sublang]
+#            return p.getphonetic()
+#        except KeyError:
+#            return None
+        
+    def getphonetic(self,sublang = Mandarin):
+        try:
+            p =  self.phonetic[sublang]
+            return p.getphonetic()
+        except KeyError:
+            return None
+    
+    def getphonetics(self):
+        return self.phonetics
+
+class Char: #字，词
+    def __init__(self,char):
+        self.mem = Memory()
+        self.char=char #字型
+        
+        self.languages = {} #语言列表 chinese,korea,japanese,veitnamese
+        self.freq=1
+        self.stroknum=1 #笔画 number of strokes
+        self.virant=[] #变体，如繁简异体字
+    
+    def addlang(self,lang):
+        self.languages[lang.language]=lang
+        
+        
+    def getlang(self,langstr):
+        try:
+            return self.languages[langstr]
+        except KeyError:
+            return None
+            
+    def addphonetic(self,phonetic, sublang = Mandarin, language = Chinese):
+        try:
+            lang = self.languages[language]
+        except KeyError:
+            lang = Language(language)
+            self.languages[language]=lang
+        
+        lang.addphonetic(phonetic,sublang,language)
+        
+    def getphonetic(self,sublang = Mandarin, language = Chinese):
+        try:
+            l = self.languages[language]
+            return l.getphonetic(sublang)
+        except KeyError:#TypeError:
+            return None
+        
+    def getphonetics(self):   
+        p = ''
+        for l in ((Mandarin,Chinese),(Cantonese,Chinese),
+            (JapaneseOn,Japanese),(JapaneseKun,Japanese),
+                (Hangul,Korean),(Korean_roman,Korean),(Vietnamese,Vietnamese)):
+            s = self.getphonetic(*l)
+            if s != None:
+                p += s + '\t'
+        return p   
+    #解释
+    def addgloss(self,gloss,language):
+        try:
+            lang = self.languages[language]
+        except KeyError:
+            lang = Language(language)
+            self.languages[language]=lang
+        
+        lang.addgloss(gloss)
+        
+    def getgloss(self,lang = None):
+        if lang != None:
+            #print 'lang not None:'+str(lang)
+            try:
+                l = self.languages[lang]
+                return l.getgloss()
+            except KeyError:
+                return ''
+             
+        else :
+            #print 'lang is None'
+            g = ''
+            for l in (Chinese,Japanese,Korean,Vietnamese,English):
+                s = self.getgloss(l)
+                if s != '':
+                    g += s + '\t'
+            return g   
+            
+    def display(self,*format, **format2):
+    
+        #print self.char,phonetic
+        self.mem.addfamiliar(1)
+        self.mem.setlasttime()
+        #phonetic = codecs.encode(self.char,'utf8')+codecs.encode(self.phonetic,'utf8'),time.strftime(ISOTIMEFORMAT,time.localtime(self.mem.lasttime))
+        phonetic = self.char + '\t' + self.phonetic + '\t' + self.english
+        print phonetic.encode('utf8')
+        
+        return phonetic
+    
+    def addfamiliar(n):
+        self.mem.addfamiliar(n)
+    
+
+     
 #TODO 如何继承系统dict类型？        
 class CharDict(dict):
     
@@ -123,16 +253,30 @@ class CharDict(dict):
         self[char.char] = char
 
 if __name__ == '__main__':
-    a = phonetic('lv3')
+    a = Phonetic('lv3')
     
     #b = a.getphonetic('lv3')
-    print a.phonetic
+    #print a.phonetic
     
-    c = phonetic('lv3/lv4')
-    print c.phonetic
+    c = Language(Chinese)
+    c.addphonetic('lv3/lv4')
+    print c.getphonetic(Mandarin).encode('utf8')
     
     s = Char('中')
-    s.phonetic='zhong1/zhong4'
-    
-    t = s.char+s.getphonetic()
+    l = Language(Chinese)
+    s.addlang(l)
+    l.addphonetic('qiu1/zhong4')
+    le = Language(English)
+    le.addgloss('media,center 中'.decode('utf8'))
+    s.addlang(le)
+    #s.addgloss('media,center 中'.decode('utf8'),English)
+    print l.getphonetic().encode('utf8')
+    #s.phonetic['Mandarin']=Phonetic('Mandarin','zhong1/zhong4')
+    p = s.getphonetic()
+    t = s.char
+    g = s.getgloss()
+    print g.encode('utf8')
     print t
+    print p.encode('utf8')
+    #for l in p.items:
+    #    print l.encode('utf8')
