@@ -36,11 +36,12 @@ class xrcmframe(wx.Frame):
         self.PostCreate(pre)
 
         # Define variables for the controls, bind event handlers
-        self.btn_next = xrc.XRCCTRL(self, "btn_next")
+        self.btnnext = xrc.XRCCTRL(self, "btnnext")
 
         self.Bind(wx.EVT_BUTTON, self.OnButton_btnsearch, id=xrc.XRCID('btnsearch'))
-        self.Bind(wx.EVT_BUTTON, self.OnButton_btn_next, self.btn_next)
-        self.Bind(wx.EVT_KEY_DOWN, self.OnKey_down_btn_next, self.btn_next)
+        self.Bind(wx.EVT_BUTTON, self.OnButton_btnnext, self.btnnext)
+        self.Bind(wx.EVT_KEY_DOWN, self.OnKey_down_btnnext, self.btnnext)
+        self.Bind(wx.EVT_BUTTON, self.OnButton_btnsave, id=xrc.XRCID('btnsave'))
 
 #!XRCED:begin-block:xrcmframe.OnButton_btnsearch
     def OnButton_btnsearch(self, evt):
@@ -49,18 +50,23 @@ class xrcmframe(wx.Frame):
         
 #!XRCED:end-block:xrcmframe.OnButton_btnsearch        
 
-#!XRCED:begin-block:xrcmframe.OnButton_btn_next
-    def OnButton_btn_next(self, evt):
-        pass
-        
-        
-#!XRCED:end-block:xrcmframe.OnButton_btn_next        
-
-#!XRCED:begin-block:xrcmframe.OnKey_down_btn_next
-    def OnKey_down_btn_next(self, evt):
+#!XRCED:begin-block:xrcmframe.OnButton_btnnext
+    def OnButton_btnnext(self, evt):
         # Replace with event handler code
-        print "OnKey_down_btn_next()"
-#!XRCED:end-block:xrcmframe.OnKey_down_btn_next        
+        print "OnButton_btnnext()"
+#!XRCED:end-block:xrcmframe.OnButton_btnnext        
+
+#!XRCED:begin-block:xrcmframe.OnKey_down_btnnext
+    def OnKey_down_btnnext(self, evt):
+        # Replace with event handler code
+        print "OnKey_down_btnnext()"
+#!XRCED:end-block:xrcmframe.OnKey_down_btnnext        
+
+#!XRCED:begin-block:xrcmframe.OnButton_btnsave
+    def OnButton_btnsave(self, evt):
+        # Replace with event handler code
+        print "OnButton_btnsave()"
+#!XRCED:end-block:xrcmframe.OnButton_btnsave        
 
 
 
@@ -84,8 +90,10 @@ def __gettext_strings():
     
     def _(str): pass
     
-    _("&Search")
+    _("Search(&F)")
     _("hello,ABC")
     _("&Next")
+    _("&Save")
+    _("ok")
     _("I Love ABC")
 

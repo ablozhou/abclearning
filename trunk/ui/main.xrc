@@ -5,31 +5,35 @@
       <orient>wxVERTICAL</orient>
       <object class="sizeritem">
         <object class="wxBoxSizer">
-          <orient>wxHORIZONTAL</orient>
           <object class="sizeritem">
             <object class="wxTextCtrl" name="txtsearch">
-              <size>300,18</size>
+              <pos>1,0</pos>
+              <size>400,100</size>
+              <style>wxTE_AUTO_SCROLL|wxTE_MULTILINE</style>
             </object>
             <option>1</option>
-            <flag>wxEXPAND</flag>
-            <border>2</border>
+            <flag>wxALL|wxEXPAND</flag>
+            <border>4</border>
           </object>
           <object class="sizeritem">
             <object class="wxButton" name="btnsearch">
-              <label>&amp;Search</label>
+              <label>Search(&amp;F)</label>
               <XRCED>
                 <events>EVT_BUTTON</events>
               </XRCED>
             </object>
             <option>0</option>
-            <flag>wxEXPAND</flag>
-            <border>1</border>
+            <flag>wxALL</flag>
+            <border>4</border>
           </object>
+          <orient>wxHORIZONTAL</orient>
         </object>
+        <option>0</option>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>1</border>
       </object>
       <object class="sizeritem">
         <object class="wxBoxSizer">
-          <orient>wxHORIZONTAL</orient>
           <object class="sizeritem">
             <object class="wxTextCtrl" name="txtmain">
               <size>300,300</size>
@@ -37,14 +41,15 @@
               <style>wxTE_AUTO_SCROLL|wxTE_MULTILINE</style>
             </object>
             <option>4</option>
-            <flag>wxEXPAND</flag>
+            <flag>wxTOP|wxBOTTOM|wxLEFT|wxRIGHT|wxALL|wxEXPAND</flag>
             <border>4</border>
+            <minsize>400,400</minsize>
+            <ratio>5</ratio>
           </object>
           <object class="sizeritem">
             <object class="wxBoxSizer">
-              <orient>wxVERTICAL</orient>
               <object class="sizeritem">
-                <object class="wxButton" name="btn_next">
+                <object class="wxButton" name="btnnext">
                   <label>&amp;Next</label>
                   <XRCED>
                     <events>EVT_BUTTON|EVT_KEY_DOWN</events>
@@ -52,9 +57,36 @@
                   </XRCED>
                 </object>
               </object>
+              <object class="sizeritem">
+                <object class="wxButton" name="btnsave">
+                  <label>&amp;Save</label>
+                  <XRCED>
+                    <events>EVT_BUTTON</events>
+                  </XRCED>
+                </object>
+              </object>
+              <orient>wxVERTICAL</orient>
             </object>
+            <option>0</option>
+            <flag>wxALL|wxEXPAND</flag>
+            <border>4</border>
           </object>
+          <orient>wxHORIZONTAL</orient>
         </object>
+        <option>1</option>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>1</border>
+      </object>
+      <object class="sizeritem">
+        <object class="wxStaticText" name="lbStatus">
+          <label>ok</label>
+          <wrap>2</wrap>
+          <style>wxSIMPLE_BORDER|wxSUNKEN_BORDER|wxDOUBLE_BORDER|wxRAISED_BORDER|wxSTATIC_BORDER|wxALIGN_LEFT</style>
+        </object>
+        <option>0</option>
+        <flag>wxALL|wxEXPAND</flag>
+        <border>1</border>
+        <minsize>400,18</minsize>
       </object>
     </object>
     <title>I Love ABC</title>

@@ -154,8 +154,11 @@ class Groups(Iter):
             log.error('page error over flow')
     
     def getunit(self,unit):
-        a = self.dict[unit]
-        return a
+        try:
+            a = self.dict[unit]
+            return a
+        except KeyError:
+            return unit
     
     def open(self,file):
         splitline = []

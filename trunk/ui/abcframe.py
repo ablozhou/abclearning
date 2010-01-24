@@ -6,6 +6,7 @@ import mainui_xrc
 import wx.xrc as xrc
 import modules.group as group
 import modules.log4py as log4py
+import string
 
 log = log4py.log4py('[abcframe]')
 
@@ -24,16 +25,38 @@ class abcframe(mainui_xrc.xrcmframe):
         self.g = iter(self.gs)
         self.group = self.g.next()
         self.p = iter(self.group)        
-        
+    def OnButton_btnsave(self, evt):
+        f = open('save.txt','a')
+        r = self.txtmain.GetValue().encode('utf8')
+        f.write(r)
+        f.close()
+            
     def OnButton_btnsearch(self, evt):
         log.debug('OnButton_btnsearch')
         search = self.txtsearch.GetValue()
         self.txtmain.SetValue(search)
-        char = self.gs.getunit(search)
-        char.display()
-        p = char.getphonetic()
-        log.debug(p)
-        res = char.char.encode('utf8') + p
+        res = ''
+        #p = phonetic.strip();
+        space = [' ', '\n', '\t']
+        for c in search:
+            if c == u'-' or c in space:
+                res += c.encode('utf8')
+                continue
+            if c in string.letters:
+                res += c.encode('utf8')
+                continue
+            if c in string.digits:
+                res += c.encode('utf8')
+                continue
+           
+            try:
+                char = self.gs.getunit(c)
+                #char.display()
+                p = char.getphonetic()
+                log.debug(p)
+                res += char.char.encode('utf8') + p + ' '
+            except AttributeError:
+                res += char.encode('utf8')
         self.txtmain.SetValue(res)
 
     def OnButton_btn_next(self, evt):
