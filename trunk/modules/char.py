@@ -68,7 +68,9 @@ class Phonetic():
                 tone = int(phonetic[-1:])
             except ValueError:
                 return phonetic
-            phonetic = string.join(phonetic[:-1],'')
+            phonetic = ''.join(phonetic[:-1])
+            #print 'py:'+ phonetic
+            #phonetic = phonetic.decode('utf8')
         #5 neutral tone    
         if tone not in range(1,5):
             return phonetic
@@ -79,6 +81,8 @@ class Phonetic():
         i = ['ī',  'í', 'ǐ', 'ì']
         u = ['ū', 'ú', 'ǔ', 'ù']
         v = ['ǖ', 'ǘ', 'ǚ', 'ǜ']
+        vb = ['ǖ', 'ǘ', 'ǚ', 'ǜ'] #Ü
+        vs = ['ǖ', 'ǘ', 'ǚ', 'ǜ'] #ü
         A = ['Ā', 'Á', 'Ǎ', 'À']
         O = ['Ō', 'Ó', 'Ǒ', 'Ò']
         E = ['Ē', 'É', 'Ě', 'È']
@@ -90,7 +94,7 @@ class Phonetic():
         if 'a' in phonetic:
             return phonetic.replace('a',a[tone-1].decode('utf8'),1)
         if 'o' in phonetic:
-            log.debug(phonetic)
+            #log.debug(phonetic)
             return phonetic.replace('o',o[tone-1].decode('utf8'),1)
         if 'e' in phonetic:
             return phonetic.replace('e',e[tone-1].decode('utf8'),1)
@@ -100,26 +104,37 @@ class Phonetic():
             return phonetic.replace('u',u[tone-1].decode('utf8'),1)
         if 'v' in phonetic:
             return phonetic.replace('v',v[tone-1].decode('utf8'),1)
+        if 'Ü'.decode('utf8') in phonetic:
+            return phonetic.replace('Ü'.decode('utf8'),vb[tone-1].decode('utf8'),1)
+        if 'ü'.decode('utf8') in phonetic:
+            return phonetic.replace('ü'.decode('utf8'),vs[tone-1].decode('utf8'),1)
     
         return phonetic    
         
-class Meaning():
-    def __init__(self,language):
-        self.language = language
-        self.meaning = meaning
-        #self.sublang = sublang
-
+#class gloss():
+#    def __init__(self,language):
+#        self.language = language
+#        self.gloss = gloss
+#        #self.sublang = sublang
+#Lang={Chinese:'Chinese'
 class Language():
     def __init__(self,language):
         self.language = language
         self.phonetic={} #读音 phonetic symbols，languae:phonetic
-        self.meaning=[] #释义 language:meaning
+        self.gloss=[] #释义 language:gloss
     #增加解释    
-    def addgloss(self,meaning):
-        self.meaning.append(meaning)
+    def addgloss(self,gloss):
+        self.gloss.append(gloss)
     
+    def getlangname(self,language):
+        if language == English:
+            return 'en'
+        return ''
+        
     def getgloss(self):
-        return ''.join(self.meaning)
+        if len(self.gloss) > 0:
+            return 'en_gls:'+''.join(self.gloss)
+        return ''
     
     #增加拼音    
     def addphonetic(self,phonetic,sublang = Mandarin, language = Chinese):
@@ -196,7 +211,9 @@ class Char: #字，词
                 (Hangul,Korean),(Korean_roman,Korean),(Vietnamese,Vietnamese)):
             s = self.getphonetic(*l)
             if s != None:
-                p += s + '\t'
+                if len(p) > 0:
+                    p += ','
+                p += s
         return p   
     #解释
     def addgloss(self,gloss,language):
@@ -253,19 +270,20 @@ class CharDict(dict):
         self[char.char] = char
 
 if __name__ == '__main__':
-    a = Phonetic('lv3')
+    a = Phonetic('lv3/lv4/lü4/lÜ4'.decode('utf8'))
     
     #b = a.getphonetic('lv3')
-    #print a.phonetic
+    print a.phonetic.encode('utf8')
     
     c = Language(Chinese)
-    c.addphonetic('lv3/lv4')
+    c.addphonetic('lv3/lv4/lü4/lÜ4'.decode('utf8'))
     print c.getphonetic(Mandarin).encode('utf8')
     
     s = Char('中')
     l = Language(Chinese)
     s.addlang(l)
-    l.addphonetic('qiu1/zhong4')
+    #l.addphonetic('qiu1/zhong4')
+    l.addphonetic('kuáng 10.11')
     le = Language(English)
     le.addgloss('media,center 中'.decode('utf8'))
     s.addlang(le)
