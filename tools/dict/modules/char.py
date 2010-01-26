@@ -1,7 +1,7 @@
 #!/bin/dev python
 # coding=utf8
 
-from memory import *
+#from memory import *
 import codecs
 import string
 import modules.log4py as log4py
@@ -171,7 +171,7 @@ class Language():
 
 class Char: #字，词
     def __init__(self,char):
-        self.mem = Memory()
+        #self.mem = Memory()
         self.char=char #字型
         
         self.languages = {} #语言列表 chinese,korea,japanese,veitnamese
@@ -248,8 +248,8 @@ class Char: #字，词
     def display(self,*format, **format2):
     
         #print self.char,phonetic
-        self.mem.addfamiliar(1)
-        self.mem.setlasttime()
+        #self.mem.addfamiliar(1)
+        #self.mem.setlasttime()
         #phonetic = codecs.encode(self.char,'utf8')+codecs.encode(self.phonetic,'utf8'),time.strftime(ISOTIMEFORMAT,time.localtime(self.mem.lasttime))
         phonetic = self.char + '\t' + self.phonetic + '\t' + self.english
         print phonetic.encode('utf8')
@@ -257,7 +257,8 @@ class Char: #字，词
         return phonetic
     
     def addfamiliar(n):
-        self.mem.addfamiliar(n)
+        pass
+        #self.mem.addfamiliar(n)
     
 
      
