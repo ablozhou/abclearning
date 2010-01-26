@@ -108,7 +108,8 @@ class Phonetic():
             return phonetic.replace('Ü'.decode('utf8'),vb[tone-1].decode('utf8'),1)
         if 'ü'.decode('utf8') in phonetic:
             return phonetic.replace('ü'.decode('utf8'),vs[tone-1].decode('utf8'),1)
-    
+        
+        #log.debug(phonetic.encode('utf8'))
         return phonetic    
         
 #class gloss():
@@ -214,6 +215,7 @@ class Char: #字，词
                 if len(p) > 0:
                     p += ','
                 p += s
+        log.debug(p.encode('utf8'))
         return p   
     #解释
     def addgloss(self,gloss,language):

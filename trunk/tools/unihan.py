@@ -17,49 +17,40 @@ dict={}
 spaces=['',' ','\t','\n']
 hzlist=[]
 
-#持久性 序列化
-#fpk=file('../data/hz.dat','wb')
-#pk.dump(hzlist,fpk,True)
-#pk.dump(dict,fpk,True)    
-#fpk.close()
-#
-#fpk1 = file('../data/hz.dat','rb')
-#hzlist1 = pk.load(fpk1)
-#dict1=pk.load(fpk1)
-#fpk1.close()
-
-
 #unicode hanzi
-for hz in xrange(0x4E00,0xA000):
-    hz = unichr(hz)
-    ch = char.Char(hz)
-    dict[hz]=ch
-    hzlist.append(hz)
-print hex(ord(hz))
-for hz in xrange(0x3400,0x4E00):
-    hz = unichr(hz)
-    ch = char.Char(hz)
-    dict[hz]=ch
-    hzlist.append(hz)
-print hex(ord(hz))
-for hz in xrange(0x20000,0x2A6E0):
-    hz = unichr(hz)
-    ch = char.Char(hz)
-    dict[hz]=ch
-    hzlist.append(hz)      
-print hex(ord(hz))
-for hz in xrange(0xF900,0xFB00):
-    hz = unichr(hz)
-    ch = char.Char(hz)
-    dict[hz]=ch
-    hzlist.append(hz)
-print hex(ord(hz))
-for hz in xrange(0x2F800,0x2FA20):
-    hz = unichr(hz)
-    ch = char.Char(hz)
-    dict[hz]=ch
-    hzlist.append(hz)
-print hex(ord(hz))
+DEBUG = False
+
+if DEBUG != True:
+    for hz in xrange(0x4E00,0xA000):
+        hz = unichr(hz)
+        ch = char.Char(hz)
+        dict[hz]=ch
+        hzlist.append(hz)
+    print hex(ord(hz))
+    for hz in xrange(0x3400,0x4E00):
+        hz = unichr(hz)
+        ch = char.Char(hz)
+        dict[hz]=ch
+        hzlist.append(hz)
+    print hex(ord(hz))
+    for hz in xrange(0x20000,0x2A6E0):
+        hz = unichr(hz)
+        ch = char.Char(hz)
+        dict[hz]=ch
+        hzlist.append(hz)      
+    print hex(ord(hz))
+    for hz in xrange(0xF900,0xFB00):
+        hz = unichr(hz)
+        ch = char.Char(hz)
+        dict[hz]=ch
+        hzlist.append(hz)
+    print hex(ord(hz))
+    for hz in xrange(0x2F800,0x2FA20):
+        hz = unichr(hz)
+        ch = char.Char(hz)
+        dict[hz]=ch
+        hzlist.append(hz)
+    print hex(ord(hz))
 
 
 log = log4py.log4py('[unihan]')
@@ -81,7 +72,8 @@ for line in lines:
         continue
     
     i+=1
-    if i >5000: break
+    if DEBUG == True:
+        if i >5000: break
     splitline = line.split('\t',5)
     print line.encode('utf8')
     splitline[0] = splitline[0].replace('U+','0x',2)
@@ -207,7 +199,8 @@ lens = 0
 i=0
 for hz in hzlist:
     i +=1
-    #if i> 5 : break
+    if DEBUG == True:
+        if i> 5000 : break
     ch = dict[hz]
     py = ch.getphonetics()
     gloss = ch.getgloss()
