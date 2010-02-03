@@ -175,9 +175,12 @@ class Char: #字，词
         self.char=char #字型
         
         self.languages = {} #语言列表 chinese,korea,japanese,veitnamese
-        self.freq=1
+        self.freq=5
         self.stroknum=1 #笔画 number of strokes
         self.virant=[] #变体，如繁简异体字
+        self.consult={} #检索方法:检索码
+        self.radical='' #偏旁部首
+        self.strokes='' #横竖撇捺弯对应12345
     
     def addlang(self,lang):
         self.languages[lang.language]=lang
