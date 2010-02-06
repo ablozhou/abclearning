@@ -17,9 +17,9 @@ splitline = []
 
 f=codecs.open(file_src, 'r','utf8')
 fw = codecs.open(file_write, 'w+','utf8')
-if not f: 
+if not f:
     log.debug('error ,cannot open file %s' % file_src)
-    exit(-1) 
+    exit(-1)
 
 lines = f.read().split('\n')
 f.close()
@@ -33,7 +33,7 @@ ZHENGMA=4
 
 
 
-
+fw.write('# 汉字，笔画数，五笔，郑码，偏旁，笔顺\n'.encode('utf8'))
 for line in lines:
     i +=1
     #if i>1000 :break
@@ -47,8 +47,8 @@ for line in lines:
     ch.radical = item[5]
     ch.strokes = item[6]
     fw.write(ch.char+ch.stroknum+ch.consult[WUBI]+ch.consult[ZHENGMA]+ch.radical+ch.strokes)
-    
+
     #fw.write(line)
     fw.write('\n')
-    
+
 fw.close()
