@@ -10,16 +10,16 @@ log = log4py.log4py('[Char]')
 
 
 Chinese = 1
-   
+
 Japanese = 3
-    
+
 Korean=5
 Vietnamese = 6
 English = 8
 
-#sublang 
+#sublang
 Mandarin = 11
-Cantonese = 12 
+Cantonese = 12
 JapaneseOn = 31
 JapaneseKun = 32
 
@@ -34,35 +34,35 @@ class Phonetic():
         self.language = language
         self.sublang = sublang
         self.setphonetic(phonetic,sublang,language)
-    
+
     def setphonetic(self,phonetic,sublang = Mandarin, language = Chinese):
         if self.sublang == Mandarin:
             self.phonetic = self.proc_phonetic(phonetic)
         else:
-            self.phonetic = phonetic            
+            self.phonetic = phonetic
     #定位多音字的词，读音，第几个字的读音,避免重复，如“数数"
     def setmulphone(self,word,phonetic,num):
         pass
-    
+
     #todo 处理多音字
     def getaphonetic(self,word = None,num = None):
         p = phonetic.split('/')
         return p[0]
-    
+
     def getphonetic(self):
         return self.phonetic
-    #兼容多音字处理                    
+    #兼容多音字处理
     def proc_phonetic(self,phonetic):
         phonetics = phonetic.split('/')
         ps = []
         for ph in phonetics:
             p = self.proc_singleph(ph)
             ps.append(p)
-            
+
         return string.join(ps,'/')
-    
+
     def proc_singleph(self,phonetic,tone = None):
-        
+
         if tone == None:
             try:
                 tone = int(phonetic[-1:])
@@ -71,10 +71,10 @@ class Phonetic():
             phonetic = ''.join(phonetic[:-1])
             #print 'py:'+ phonetic
             #phonetic = phonetic.decode('utf8')
-        #5 neutral tone    
+        #5 neutral tone
         if tone not in range(1,5):
             return phonetic
-        
+
         a = ['ā', 'á', 'ǎ', 'à']
         o = ['ō', 'ó', 'ǒ', 'ò']
         e = ['ē', 'é', 'ě', 'è']
@@ -86,7 +86,7 @@ class Phonetic():
         A = ['Ā', 'Á', 'Ǎ', 'À']
         O = ['Ō', 'Ó', 'Ǒ', 'Ò']
         E = ['Ē', 'É', 'Ě', 'È']
-        
+
         if 'iu' in phonetic:
             return phonetic.replace('u',u[tone-1].decode('utf8'),1)
         if 'ui' in phonetic:
@@ -108,10 +108,10 @@ class Phonetic():
             return phonetic.replace('Ü'.decode('utf8'),vb[tone-1].decode('utf8'),1)
         if 'ü'.decode('utf8') in phonetic:
             return phonetic.replace('ü'.decode('utf8'),vs[tone-1].decode('utf8'),1)
-        
+
         #log.debug(phonetic.encode('utf8'))
-        return phonetic    
-        
+        return phonetic
+
 #class gloss():
 #    def __init__(self,language):
 #        self.language = language
@@ -123,21 +123,21 @@ class Language():
         self.language = language
         self.phonetic={} #读音 phonetic symbols，languae:phonetic
         self.gloss=[] #释义 language:gloss
-    #增加解释    
+    #增加解释
     def addgloss(self,gloss):
         self.gloss.append(gloss)
-    
+
     def getlangname(self,language):
         if language == English:
             return 'en'
         return ''
-        
+
     def getgloss(self):
         if len(self.gloss) > 0:
-            return 'en_gls:'+''.join(self.gloss)
+            return 'en:'+''.join(self.gloss)
         return ''
-    
-    #增加拼音    
+
+    #增加拼音
     def addphonetic(self,phonetic,sublang = Mandarin, language = Chinese):
         try:
             po = self.phonetic[sublang]
@@ -146,26 +146,26 @@ class Language():
             self.phonetic[po.sublang] = po
 
         plist = po.getphonetic().split('/')
-            
+
         new_plist = phonetic.split('/')
         if len(plist) < len(new_plist):
             po.setphonetic(phonetic,sublang,language)
-            
-        
+
+
 #    def getphone_sublang(self,sublang = Mandarin):
 #        try:
 #            p =  self.phonetic[sublang]
 #            return p.getphonetic()
 #        except KeyError:
 #            return None
-        
+
     def getphonetic(self,sublang = Mandarin):
         try:
             p =  self.phonetic[sublang]
             return p.getphonetic()
         except KeyError:
             return None
-    
+
     def getphonetics(self):
         return self.phonetics
 
@@ -173,42 +173,42 @@ class Char: #字，词
     def __init__(self,char):
         self.mem = Memory()
         self.char=char #字型
-        
+
         self.languages = {} #语言列表 chinese,korea,japanese,veitnamese
-        self.freq=5
-        self.stroknum=1 #笔画 number of strokes
+        self.freq=-1
+        self.strokenum=-1 #笔画 number of strokes
         self.virant=[] #变体，如繁简异体字
         self.consult={} #检索方法:检索码
         self.radical='' #偏旁部首
         self.strokes='' #横竖撇捺弯对应12345
-    
+
     def addlang(self,lang):
         self.languages[lang.language]=lang
-        
-        
+
+
     def getlang(self,langstr):
         try:
             return self.languages[langstr]
         except KeyError:
             return None
-            
+
     def addphonetic(self,phonetic, sublang = Mandarin, language = Chinese):
         try:
             lang = self.languages[language]
         except KeyError:
             lang = Language(language)
             self.languages[language]=lang
-        
+
         lang.addphonetic(phonetic,sublang,language)
-        
+
     def getphonetic(self,sublang = Mandarin, language = Chinese):
         try:
             l = self.languages[language]
             return l.getphonetic(sublang)
         except KeyError:#TypeError:
             return None
-        
-    def getphonetics(self):   
+
+    def getphonetics(self):
         p = ''
         for l in ((Mandarin,Chinese),(Cantonese,Chinese),
             (JapaneseOn,Japanese),(JapaneseKun,Japanese),
@@ -219,7 +219,7 @@ class Char: #字，词
                     p += ','
                 p += s
         log.debug(p.encode('utf8'))
-        return p   
+        return p
     #解释
     def addgloss(self,gloss,language):
         try:
@@ -227,9 +227,9 @@ class Char: #字，词
         except KeyError:
             lang = Language(language)
             self.languages[language]=lang
-        
+
         lang.addgloss(gloss)
-        
+
     def getgloss(self,lang = None):
         if lang != None:
             #print 'lang not None:'+str(lang)
@@ -238,7 +238,7 @@ class Char: #字，词
                 return l.getgloss()
             except KeyError:
                 return ''
-             
+
         else :
             #print 'lang is None'
             g = ''
@@ -246,44 +246,44 @@ class Char: #字，词
                 s = self.getgloss(l)
                 if s != '':
                     g += s + '\t'
-            return g   
-            
+            return g
+
     def display(self,*format, **format2):
-    
+
         #print self.char,phonetic
         self.mem.addfamiliar(1)
         self.mem.setlasttime()
         #phonetic = codecs.encode(self.char,'utf8')+codecs.encode(self.phonetic,'utf8'),time.strftime(ISOTIMEFORMAT,time.localtime(self.mem.lasttime))
         phonetic = self.char + '\t' + self.phonetic + '\t' + self.english
         print phonetic.encode('utf8')
-        
+
         return phonetic
-    
+
     def addfamiliar(n):
         self.mem.addfamiliar(n)
-    
 
-     
-#TODO 如何继承系统dict类型？        
+
+
+#TODO 如何继承系统dict类型？
 class CharDict(dict):
-    
+
     def __init__(self):
         #self.dict={}
         pass
-        
+
     def addchar(self, char):
         self[char.char] = char
 
 if __name__ == '__main__':
     a = Phonetic('lv3/lv4/lü4/lÜ4'.decode('utf8'))
-    
+
     #b = a.getphonetic('lv3')
     print a.phonetic.encode('utf8')
-    
+
     c = Language(Chinese)
     c.addphonetic('lv3/lv4/lü4/lÜ4'.decode('utf8'))
     print c.getphonetic(Mandarin).encode('utf8')
-    
+
     s = Char('中')
     l = Language(Chinese)
     s.addlang(l)
