@@ -295,7 +295,7 @@ if __name__ == '__main__':
     #s.addgloss('media,center 中'.decode('utf8'),English)
     print l.getphonetic().encode('utf8')
     #s.phonetic['Mandarin']=Phonetic('Mandarin','zhong1/zhong4')
-    p = s.getphonetic()
+    p = s.getphonetics()
     t = s.char
     g = s.getgloss()
     print g.encode('utf8')
