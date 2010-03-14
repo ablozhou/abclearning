@@ -36,19 +36,66 @@ class xrcmframe(wx.Frame):
         self.PostCreate(pre)
 
         # Define variables for the controls, bind event handlers
-        self.btnabout = xrc.XRCCTRL(self, "btnabout")
+        self.btnnext = xrc.XRCCTRL(self, "btnnext")
 
-        self.Bind(wx.EVT_BUTTON, self.OnButton_btnsearch, id=xrc.XRCID('btnsearch'))
+        self.Bind(wx.EVT_MENU, self.OnMenu_open, id=xrc.XRCID('open'))
+        self.Bind(wx.EVT_MENU, self.OnMenu_save, id=xrc.XRCID('save'))
+        self.Bind(wx.EVT_MENU, self.OnMenu_exit, id=xrc.XRCID('exit'))
+        self.Bind(wx.EVT_MENU, self.OnMenu_paste, id=xrc.XRCID('paste'))
+        self.Bind(wx.EVT_TOOL, self.OnTool_open, id=xrc.XRCID('open'))
+        self.Bind(wx.EVT_TREE_SEL_CHANGED, self.OnTree_sel_changed_tree, id=xrc.XRCID('tree'))
+        self.Bind(wx.EVT_BUTTON, self.OnButton_btnnext, self.btnnext)
+        self.Bind(wx.EVT_KEY_DOWN, self.OnKey_down_btnnext, self.btnnext)
         self.Bind(wx.EVT_BUTTON, self.OnButton_btnsave, id=xrc.XRCID('btnsave'))
-        self.Bind(wx.EVT_BUTTON, self.OnButton_btnabout, self.btnabout)
-        self.Bind(wx.EVT_KEY_DOWN, self.OnKey_down_btnabout, self.btnabout)
+        self.Bind(wx.EVT_BUTTON, self.OnButton_btnsearch, id=xrc.XRCID('btnsearch'))
 
-#!XRCED:begin-block:xrcmframe.OnButton_btnsearch
-    def OnButton_btnsearch(self, evt):
-        print 'parent:OnButton_btnsearch'
-        
-        
-#!XRCED:end-block:xrcmframe.OnButton_btnsearch        
+#!XRCED:begin-block:xrcmframe.OnMenu_open
+    def OnMenu_open(self, evt):
+        # Replace with event handler code
+        print "OnMenu_open()"
+#!XRCED:end-block:xrcmframe.OnMenu_open        
+
+#!XRCED:begin-block:xrcmframe.OnMenu_save
+    def OnMenu_save(self, evt):
+        # Replace with event handler code
+        print "OnMenu_save()"
+#!XRCED:end-block:xrcmframe.OnMenu_save        
+
+#!XRCED:begin-block:xrcmframe.OnMenu_exit
+    def OnMenu_exit(self, evt):
+        # Replace with event handler code
+        print "OnMenu_exit()"
+#!XRCED:end-block:xrcmframe.OnMenu_exit        
+
+#!XRCED:begin-block:xrcmframe.OnMenu_paste
+    def OnMenu_paste(self, evt):
+        # Replace with event handler code
+        print "OnMenu_paste()"
+#!XRCED:end-block:xrcmframe.OnMenu_paste        
+
+#!XRCED:begin-block:xrcmframe.OnTool_open
+    def OnTool_open(self, evt):
+        # Replace with event handler code
+        print "OnTool_open()"
+#!XRCED:end-block:xrcmframe.OnTool_open        
+
+#!XRCED:begin-block:xrcmframe.OnTree_sel_changed_tree
+    def OnTree_sel_changed_tree(self, evt):
+        # Replace with event handler code
+        print "OnTree_sel_changed_tree()"
+#!XRCED:end-block:xrcmframe.OnTree_sel_changed_tree        
+
+#!XRCED:begin-block:xrcmframe.OnButton_btnnext
+    def OnButton_btnnext(self, evt):
+        # Replace with event handler code
+        print "OnButton_btnnext()"
+#!XRCED:end-block:xrcmframe.OnButton_btnnext        
+
+#!XRCED:begin-block:xrcmframe.OnKey_down_btnnext
+    def OnKey_down_btnnext(self, evt):
+        # Replace with event handler code
+        print "OnKey_down_btnnext()"
+#!XRCED:end-block:xrcmframe.OnKey_down_btnnext        
 
 #!XRCED:begin-block:xrcmframe.OnButton_btnsave
     def OnButton_btnsave(self, evt):
@@ -56,17 +103,12 @@ class xrcmframe(wx.Frame):
         print "OnButton_btnsave()"
 #!XRCED:end-block:xrcmframe.OnButton_btnsave        
 
-#!XRCED:begin-block:xrcmframe.OnButton_btnabout
-    def OnButton_btnabout(self, evt):
-        # Replace with event handler code
-        print "OnButton_btnabout()"
-#!XRCED:end-block:xrcmframe.OnButton_btnabout        
-
-#!XRCED:begin-block:xrcmframe.OnKey_down_btnabout
-    def OnKey_down_btnabout(self, evt):
-        # Replace with event handler code
-        print "OnKey_down_btnabout()"
-#!XRCED:end-block:xrcmframe.OnKey_down_btnabout        
+#!XRCED:begin-block:xrcmframe.OnButton_btnsearch
+    def OnButton_btnsearch(self, evt):
+        print 'parent:OnButton_btnsearch'
+        
+        
+#!XRCED:end-block:xrcmframe.OnButton_btnsearch        
 
 
 
@@ -90,10 +132,17 @@ def __gettext_strings():
     
     def _(str): pass
     
-    _("Search(&F)")
-    _("hello,ABC")
+    _("&Open")
+    _("&File")
     _("&Save")
-    _("&About")
-    _("http://blog.csdn.net/ablo&zhou")
+    _("&Exit")
+    _("&Edit")
+    _("&Paste")
+    _("&Help")
+    _("&Index")
+    _("hello,ABC")
+    _("&Next")
+    _("&Save")
+    _("Search(&F)")
     _("I Love ABC")
 

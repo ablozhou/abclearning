@@ -24,7 +24,7 @@ os.chdir(workpath)
 #todo 接受输入参数，获取输入，得到下一组汉字或需记忆的词组
 #todo 给一个汉字，查询读音，释义，例句
 if __name__ == '__main__':
-    gs = modules.group.Groups(2, 20)
+'''    gs = modules.group.Groups(2, 20)
     gs.open('./data/freq_part.txt')
     g = iter(gs)
     group = g.next()
@@ -52,11 +52,12 @@ if __name__ == '__main__':
             g = iter(gs)
             group = g.next()
             p = iter(group)
-            
+
         else:
             #TODO: 判断无效输入
             if(cmd != None and cmd != ''):
                 c = cmd.decode('utf8')
                 char = gs.getunit(c)
                 char.display()
-        
+
+'''
