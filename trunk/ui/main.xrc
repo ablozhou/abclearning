@@ -78,7 +78,6 @@
         <object class="sizeritem">
           <object class="wxTextCtrl" name="txtmain">
             <size>300,400</size>
-            <value>hello,ABC</value>
             <style>wxWANTS_CHARS|wxTE_AUTO_SCROLL|wxTE_MULTILINE|wxTE_RICH2</style>
           </object>
           <option>1</option>
