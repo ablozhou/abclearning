@@ -140,7 +140,6 @@ def __gettext_strings():
     _("&Paste")
     _("&Help")
     _("&Index")
-    _("hello,ABC")
     _("&Next")
     _("&Save")
     _("Search(&F)")

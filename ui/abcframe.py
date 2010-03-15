@@ -20,12 +20,12 @@ class abcframe(mainui_xrc.xrcmframe):
 
         self.txtmain = xrc.XRCCTRL(self, "txtmain")
         self.tree = xrc.XRCCTRL(self, "tree")
-
-        #self.AddTreeNodes()
+        filename = '../data/唐诗三百首/唐诗三百首之.卷一、五言古诗.txt'
+        self.AddTreeNodes(filename)
 
     def OnTool_open(self, event):
         self.filewildchar=['*.txt','*.*']
-        dlg = wx.FileDialog(self, "File List", '../data/', "", '|'.join(self.filewildchar), wx.OPEN|wx.MULTIPLE)
+        dlg = wx.FileDialog(self, "File List", '../data/唐诗三百首/', "", '|'.join(self.filewildchar), wx.OPEN|wx.MULTIPLE)
 
         #for i, v in enumerate(self.filewildchar):
         #    s = v.split('|')[0]
@@ -89,7 +89,12 @@ class abcframe(mainui_xrc.xrcmframe):
     def OnTree_sel_changed_tree(self, evt):
         item = evt.GetItem()
         data = self.tree.GetItemPyData(item)
+        points = self.txtmain.GetFont().GetPointSize()
+        f = wx.Font(points + 10, wx.ROMAN, wx.NORMAL, wx.BOLD, False)
+
         self.txtmain.SetValue(data)
+        pos = data.find('\n\n')
+        self.txtmain.SetStyle(0, pos, wx.TextAttr("blue", wx.NullColour, f))
 
     def open(self,filename):
         self.data = file(filename,'rb').read()
