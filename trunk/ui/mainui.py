@@ -5,10 +5,22 @@ import wx
 import mainui_xrc
 import abcframe
 
-#TODO 设置多行文本控件字体
+class AbclApp(wx.App):
+    def OnInit(self):
+
+        self.mainfrm = abcframe.abcframe(parent = None)
+
+        self.SetTopWindow(self.mainfrm)
+        self.mainfrm.Show()
+        return True
+
+    def Exit(self):
+        pass
+
+
+
 #指定一个文件的另一个执行文件
 if __name__ == '__main__':
-    app = wx.PySimpleApp()
-    frame = abcframe.abcframe(parent = None)
-    frame.Show()
+    app = AbclApp(0)
+
     app.MainLoop()
