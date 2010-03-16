@@ -21,7 +21,7 @@ class abcframe(mainui_xrc.xrcmframe):
         self.txtmain = xrc.XRCCTRL(self, "txtmain")
         self.tree = xrc.XRCCTRL(self, "tree")
         filename = '../data/唐诗三百首/唐诗三百首之.卷一、五言古诗.txt'
-        self.AddTreeNodes(filename)
+        #self.AddTreeNodes(filename)
 
     def OnTool_open(self, event):
         self.filewildchar=['*.txt','*.*']

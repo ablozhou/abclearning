@@ -119,7 +119,7 @@ def __init_resources():
     global __res
     __res = xrc.EmptyXmlResource()
 
-    __res.Load('main.xrc')
+    __res.Load('abcl.xrc')
 
 # ----------------------- Gettext strings ---------------------
 
@@ -138,6 +138,8 @@ def __gettext_strings():
     _("&Exit")
     _("&Edit")
     _("&Paste")
+    _("&Tools")
+    _("doc")
     _("&Help")
     _("&Index")
     _("&Next")
