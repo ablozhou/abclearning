@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource class="wxButton">
+  <object class="wxFrame" name="mframe">
+    <object class="wxMenuBar" name="menubar">
+      <object class="wxMenu" name="file">
+        <object class="wxMenuItem" name="open">
+          <label>&amp;Open</label>
+          <bitmap stock_id="wxART_FILE_OPEN"/>
+          <XRCED>
+            <events>EVT_MENU</events>
+          </XRCED>
+        </object>
+        <label>&amp;File</label>
+        <object class="wxMenuItem" name="save">
+          <label>&amp;Save</label>
+          <XRCED>
+            <events>EVT_MENU</events>
+          </XRCED>
+        </object>
+        <object class="separator"/>
+        <object class="wxMenuItem" name="exit">
+          <label>&amp;Exit</label>
+          <XRCED>
+            <events>EVT_MENU</events>
+          </XRCED>
+        </object>
+      </object>
+      <object class="wxMenu" name="edit">
+        <label>&amp;Edit</label>
+        <object class="wxMenuItem" name="paste">
+          <label>&amp;Paste</label>
+          <XRCED>
+            <events>EVT_MENU</events>
+          </XRCED>
+        </object>
+      </object>
+      <object class="wxMenu" name="tools">
+        <label>&amp;Tools</label>
+        <object class="wxMenuItem">
+          <label>doc</label>
+        </object>
+      </object>
+      <object class="wxMenu" name="help">
+        <label>&amp;Help</label>
+        <object class="wxMenuItem">
+          <label>&amp;Index</label>
+          <XRCED>
+            <events>EVT_MENU</events>
+          </XRCED>
+        </object>
+      </object>
+      <style>wxMB_DOCKABLE</style>
+    </object>
+    <object class="wxToolBar">
+      <object class="tool" name="new">
+        <bitmap stock_id="wxART_NEW"/>
+      </object>
+      <object class="tool" name="open">
+        <bitmap stock_id="wxART_FILE_OPEN"/>
+        <XRCED>
+          <events>EVT_TOOL</events>
+        </XRCED>
+      </object>
+      <packing>1</packing>
+      <separation>1</separation>
+      <style>wxTB_FLAT|wxTB_DOCKABLE|wxTB_3DBUTTONS</style>
+    </object>
+    <object class="wxPanel">
+      <object class="wxBoxSizer">
+        <object class="sizeritem">
+          <object class="wxTreeCtrl" name="tree">
+            <size>200,400</size>
+            <style>wxTR_EDIT_LABELS|wxTR_HAS_BUTTONS|wxTR_HIDE_ROOT|wxTR_EXTENDED|wxTR_DEFAULT_STYLE</style>
+            <XRCED>
+              <events>EVT_TREE_SEL_CHANGED</events>
+            </XRCED>
+          </object>
+          <option>0</option>
+          <flag>wxALL|wxEXPAND</flag>
+          <border>4</border>
+          <minsize>200,200</minsize>
+          <ratio>5</ratio>
+        </object>
+        <object class="sizeritem">
+          <object class="wxTextCtrl" name="txtmain">
+            <size>300,400</size>
+            <style>wxWANTS_CHARS|wxTE_AUTO_SCROLL|wxTE_MULTILINE|wxTE_RICH2</style>
+          </object>
+          <option>1</option>
+          <flag>wxALL|wxEXPAND</flag>
+          <border>4</border>
+          <minsize>300,300</minsize>
+        </object>
+        <object class="sizeritem">
+          <object class="wxBoxSizer">
+            <object class="sizeritem">
+              <object class="wxButton" name="btnnext">
+                <label>&amp;Next</label>
+                <XRCED>
+                  <events>EVT_BUTTON|EVT_KEY_DOWN</events>
+                  <assign_var>1</assign_var>
+                </XRCED>
+              </object>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="btnsave">
+                <label>&amp;Save</label>
+                <XRCED>
+                  <events>EVT_BUTTON</events>
+                </XRCED>
+              </object>
+            </object>
+            <object class="sizeritem">
+              <object class="wxButton" name="btnsearch">
+                <label>Search(&amp;F)</label>
+                <XRCED>
+                  <events>EVT_BUTTON</events>
+                </XRCED>
+              </object>
+            </object>
+            <orient>wxVERTICAL</orient>
+          </object>
+          <option>0</option>
+          <flag>wxALL|wxEXPAND</flag>
+          <border>4</border>
+          <ratio>1</ratio>
+        </object>
+        <orient>wxHORIZONTAL</orient>
+      </object>
+    </object>
+    <object class="wxStatusBar" name="status">
+      <fields>3</fields>
+      <widths>-3,-1,-1</widths>
+    </object>
+    <pos>1,0</pos>
+    <size>700,500</size>
+    <title>I Love ABC</title>
+    <centered>1</centered>
+  </object>
+</resource>

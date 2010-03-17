@@ -1,38 +1,31 @@
-#!/bin/env python
-#coding=utf8
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
 
 import wx
 import sys
-import modules.group
-#import modules.char
+import abcxrc
+import abclfrm
 
-class MainPanel(wx.Panel):
-    
-    def __init__(self,parent,id):
-        wx.Panel.__init__(self,parent,id,style=wx.BORDER_SUNKEN)
-        leftbox = wx.BoxSizer(wx.VERTICAL)
-        self.medit = wx.TextCtrl(self,-1,name='medit',style=wx.TE_MULTILINE)
-        self.medit.SetEditable(True)
-        self.inputtxt = wx.TextCtrl(self,-1,name='input',style=wx.TE_MULTILINE)
-        leftbox.Add(self.inputtxt,1,wx.EXPAND|wx.TOP|wx.LEFT,5)
-        leftbox.Add(self.medit,4,wx.EXPAND|wx.TOP|wx.LEFT,5)
+class AbclApp(wx.App):
+    def OnInit(self):
 
-        self.SetSizer(leftbox)
-        
-class Frame(wx.Frame):
-    def __init__(self,parent,id,title):
-        wx.Frame.__init__(self,parent,id,title,size = (500,400))
-        panel = MainPanel(self, -1)
-        myBox = wx.BoxSizer()
-        myBox.Add(panel, -1, wx.EXPAND)
-        
-        self.SetSizer(myBox)
-        self.Show()
-        
+        self.mainfrm = abclfrm.abclfrm(parent = None)
+
+        self.SetTopWindow(self.mainfrm)
+        self.mainfrm.Show()
+        return True
+
+    def Exit(self):
+        pass
+
+
+
+#指定一个文件的另一个执行文件
 def main():
-    app = wx.App()
-    frame = Frame(None,-1,'学认汉字')
+    app = AbclApp(0)
+
     app.MainLoop()
-    
+
+
 if __name__ == '__main__':
     sys.exit(main())
