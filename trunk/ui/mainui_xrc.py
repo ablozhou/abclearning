@@ -38,16 +38,24 @@ class xrcmframe(wx.Frame):
         # Define variables for the controls, bind event handlers
         self.btnnext = xrc.XRCCTRL(self, "btnnext")
 
+        self.Bind(wx.EVT_MENU, self.OnMenu_new, id=xrc.XRCID('new'))
         self.Bind(wx.EVT_MENU, self.OnMenu_open, id=xrc.XRCID('open'))
         self.Bind(wx.EVT_MENU, self.OnMenu_save, id=xrc.XRCID('save'))
         self.Bind(wx.EVT_MENU, self.OnMenu_exit, id=xrc.XRCID('exit'))
         self.Bind(wx.EVT_MENU, self.OnMenu_paste, id=xrc.XRCID('paste'))
+        self.Bind(wx.EVT_TOOL, self.OnTool_new, id=xrc.XRCID('new'))
         self.Bind(wx.EVT_TOOL, self.OnTool_open, id=xrc.XRCID('open'))
         self.Bind(wx.EVT_TREE_SEL_CHANGED, self.OnTree_sel_changed_tree, id=xrc.XRCID('tree'))
         self.Bind(wx.EVT_BUTTON, self.OnButton_btnnext, self.btnnext)
         self.Bind(wx.EVT_KEY_DOWN, self.OnKey_down_btnnext, self.btnnext)
         self.Bind(wx.EVT_BUTTON, self.OnButton_btnsave, id=xrc.XRCID('btnsave'))
         self.Bind(wx.EVT_BUTTON, self.OnButton_btnsearch, id=xrc.XRCID('btnsearch'))
+
+#!XRCED:begin-block:xrcmframe.OnMenu_new
+    def OnMenu_new(self, evt):
+        # Replace with event handler code
+        print "OnMenu_new()"
+#!XRCED:end-block:xrcmframe.OnMenu_new        
 
 #!XRCED:begin-block:xrcmframe.OnMenu_open
     def OnMenu_open(self, evt):
@@ -72,6 +80,12 @@ class xrcmframe(wx.Frame):
         # Replace with event handler code
         print "OnMenu_paste()"
 #!XRCED:end-block:xrcmframe.OnMenu_paste        
+
+#!XRCED:begin-block:xrcmframe.OnTool_new
+    def OnTool_new(self, evt):
+        # Replace with event handler code
+        print "OnTool_new()"
+#!XRCED:end-block:xrcmframe.OnTool_new        
 
 #!XRCED:begin-block:xrcmframe.OnTool_open
     def OnTool_open(self, evt):
@@ -119,7 +133,7 @@ def __init_resources():
     global __res
     __res = xrc.EmptyXmlResource()
 
-    __res.Load('abcl.xrc')
+    __res.Load('main.xrc')
 
 # ----------------------- Gettext strings ---------------------
 
@@ -132,14 +146,13 @@ def __gettext_strings():
     
     def _(str): pass
     
+    _("&New")
     _("&Open")
     _("&File")
     _("&Save")
     _("&Exit")
     _("&Edit")
     _("&Paste")
-    _("&Tools")
-    _("doc")
     _("&Help")
     _("&Index")
     _("&Next")

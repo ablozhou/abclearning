@@ -20,6 +20,19 @@ class abclfrm(abcxrc.xrcmframe):
 
         self.txtmain = xrc.XRCCTRL(self, "txtmain")
         self.tree = xrc.XRCCTRL(self, "tree")
+        il = wx.ImageList(16,16)
+        self.fldridx = il.Add(
+            wx.ArtProvider.GetBitmap(wx.ART_FOLDER,
+                    wx.ART_OTHER, (16,16)))
+        self.fldropenidx = il.Add(
+            wx.ArtProvider.GetBitmap(wx.ART_FILE_OPEN,
+                    wx.ART_OTHER, (16,16)))
+        self.fileidx = il.Add(
+            wx.ArtProvider.GetBitmap(wx.ART_NORMAL_FILE,
+                    wx.ART_OTHER, (16,16)))
+
+        self.tree.AssignImageList(il)
+        self.root = self.tree.AddRoot('root')
         filename = '../data/hz.txt'
         self.AddTreeNodes(filename)
 
@@ -46,20 +59,8 @@ class abclfrm(abcxrc.xrcmframe):
         #获取文件名作为总节点
         #(path,rootfile) = os.path.split(filename)
         #(rootm,roote) = os.path.splitext(rootfile)
+        #self.tree.DeleteChildren(self.root)
 
-        il = wx.ImageList(16,16)
-        self.fldridx = il.Add(
-            wx.ArtProvider.GetBitmap(wx.ART_FOLDER,
-                    wx.ART_OTHER, (16,16)))
-        self.fldropenidx = il.Add(
-            wx.ArtProvider.GetBitmap(wx.ART_FILE_OPEN,
-                    wx.ART_OTHER, (16,16)))
-        self.fileidx = il.Add(
-            wx.ArtProvider.GetBitmap(wx.ART_NORMAL_FILE,
-                    wx.ART_OTHER, (16,16)))
-
-        self.tree.AssignImageList(il)
-        root = self.tree.AddRoot('root')
         #text=''
         #encoding = None
         encoding,begin = encdet.detect(filename)
@@ -83,7 +84,7 @@ class abclfrm(abcxrc.xrcmframe):
 
             log.debug('title: '+title)
 
-            dir = self.tree.AppendItem(root,title.encode('utf8'))
+            dir = self.tree.AppendItem(self.root,title.encode('utf8'))
             self.tree.SetItemPyData(dir,title)
             self.tree.SetItemImage(dir, self.fldridx,
                                    wx.TreeItemIcon_Normal)
