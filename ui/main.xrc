@@ -3,6 +3,12 @@
   <object class="wxFrame" name="mframe">
     <object class="wxMenuBar" name="menubar">
       <object class="wxMenu" name="file">
+        <object class="wxMenuItem" name="new">
+          <label>&amp;New</label>
+          <XRCED>
+            <events>EVT_MENU</events>
+          </XRCED>
+        </object>
         <object class="wxMenuItem" name="open">
           <label>&amp;Open</label>
           <bitmap stock_id="wxART_FILE_OPEN"/>
@@ -48,6 +54,9 @@
     <object class="wxToolBar">
       <object class="tool" name="new">
         <bitmap stock_id="wxART_NEW"/>
+        <XRCED>
+          <events>EVT_TOOL</events>
+        </XRCED>
       </object>
       <object class="tool" name="open">
         <bitmap stock_id="wxART_FILE_OPEN"/>
@@ -64,7 +73,7 @@
         <object class="sizeritem">
           <object class="wxTreeCtrl" name="tree">
             <size>200,400</size>
-            <style>wxTR_EDIT_LABELS|wxTR_HAS_BUTTONS|wxTR_EXTENDED|wxTR_DEFAULT_STYLE</style>
+            <style>wxTR_EDIT_LABELS|wxTR_HAS_BUTTONS|wxTR_HIDE_ROOT|wxTR_EXTENDED|wxTR_DEFAULT_STYLE</style>
             <XRCED>
               <events>EVT_TREE_SEL_CHANGED</events>
             </XRCED>

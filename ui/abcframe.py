@@ -20,8 +20,24 @@ class abcframe(mainui_xrc.xrcmframe):
 
         self.txtmain = xrc.XRCCTRL(self, "txtmain")
         self.tree = xrc.XRCCTRL(self, "tree")
+        il = wx.ImageList(16,16)
+        self.fldridx = il.Add(
+            wx.ArtProvider.GetBitmap(wx.ART_FOLDER,
+                    wx.ART_OTHER, (16,16)))
+        self.fldropenidx = il.Add(
+            wx.ArtProvider.GetBitmap(wx.ART_FILE_OPEN,
+                    wx.ART_OTHER, (16,16)))
+        self.fileidx = il.Add(
+            wx.ArtProvider.GetBitmap(wx.ART_NORMAL_FILE,
+                    wx.ART_OTHER, (16,16)))
+
+        self.tree.AssignImageList(il)
+        self.root = self.tree.AddRoot('root')
         filename = '../data/唐诗三百首/唐诗三百首之.卷一、五言古诗.txt'
         #self.AddTreeNodes(filename)
+    def OnTool_new(self, evt):
+        #self.tree.DeleteAllItems()
+        self.tree.DeleteChildren(self.root)
 
     def OnTool_open(self, event):
         self.filewildchar=['*.txt','*.*']
@@ -47,21 +63,10 @@ class abcframe(mainui_xrc.xrcmframe):
         #(path,rootfile) = os.path.split(filename)
         #(rootm,roote) = os.path.splitext(rootfile)
 
-        il = wx.ImageList(16,16)
-        self.fldridx = il.Add(
-            wx.ArtProvider.GetBitmap(wx.ART_FOLDER,
-                    wx.ART_OTHER, (16,16)))
-        self.fldropenidx = il.Add(
-            wx.ArtProvider.GetBitmap(wx.ART_FILE_OPEN,
-                    wx.ART_OTHER, (16,16)))
-        self.fileidx = il.Add(
-            wx.ArtProvider.GetBitmap(wx.ART_NORMAL_FILE,
-                    wx.ART_OTHER, (16,16)))
-
-        self.tree.AssignImageList(il)
 
         #text=''
         #encoding = None
+        #self.tree.DeleteAllItems()
         encoding,begin = encdet.detect(filename)
         data = open(filename,'r').read().decode(encoding)
         items = data.split('=============================')
@@ -69,7 +74,7 @@ class abcframe(mainui_xrc.xrcmframe):
         rootm = titles[-2]
         log.debug('root'+rootm)
 
-        root = self.tree.AddRoot(rootm)
+        root = self.tree.AppendItem(self.root,rootm)
         self.tree.SetItemImage(root, self.fldridx,
                                wx.TreeItemIcon_Normal)
         self.tree.SetItemImage(root, self.fldropenidx,
@@ -85,7 +90,7 @@ class abcframe(mainui_xrc.xrcmframe):
             self.tree.SetItemImage(it, self.fileidx,
                                    wx.TreeItemIcon_Normal)
 
-        self.tree.Expand(root)
+        #self.tree.Expand(root)
     def OnTree_sel_changed_tree(self, evt):
         item = evt.GetItem()
         data = self.tree.GetItemPyData(item)
@@ -140,5 +145,7 @@ class abcframe(mainui_xrc.xrcmframe):
 
     def OnButton_btn_next(self, evt):
 
-        self.p = self.group.next()
-        self.txtmain.SetValue(self.p.getstr().encode('utf8'))
+        #self.p = self.group.next()
+        #self.txtmain.SetValue(self.p.getstr().encode('utf8'))
+        #self.tree.
+        pass
