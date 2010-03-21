@@ -68,7 +68,7 @@ class abcframe(mainui_xrc.xrcmframe):
         #encoding = None
         #self.tree.DeleteAllItems()
         encoding,begin = encdet.detect(filename)
-        data = open(filename,'r').read().decode(encoding)
+        data = open(filename,'rU').read().decode(encoding)
         items = data.split('=============================')
         titles = items[0].splitlines()
         rootm = titles[-2]
