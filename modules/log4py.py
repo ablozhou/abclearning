@@ -130,7 +130,9 @@ class log4py:
             self.outstd(self._gettime(),'[FATAL',self.modulename,*fmt)
         if 'fatal' in self.loglevel['file']:
             self.outfile(self._gettime(),'[FATAL',self.modulename,*fmt)
-
+    def tracebk(self):
+        message = traceback.format_exception(*sys.exc_info())
+        print ''.join(message)
 #unit test
 if __name__ == '__main__':
     log=log4py()
