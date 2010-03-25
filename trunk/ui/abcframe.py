@@ -33,8 +33,16 @@ class abcframe(mainui_xrc.xrcmframe):
 
         self.tree.AssignImageList(il)
         self.root = self.tree.AddRoot('root')
-        filename = '../data/唐诗三百首/唐诗三百首之.卷一、五言古诗.txt'
-        #self.AddTreeNodes(filename)
+        dirname = '../data/唐诗三百首/'
+        filenames = sorted(os.listdir(dirname))
+
+        for filename in filenames:
+
+            #filename = '../data/唐诗三百首/唐诗三百首之.卷一、五言古诗.txt'
+            if os.path.isfile(dirname+filename):
+
+                self.AddTreeNodes(dirname+filename)
+
     def OnTool_new(self, evt):
         #self.tree.DeleteAllItems()
         self.tree.DeleteChildren(self.root)
@@ -67,6 +75,7 @@ class abcframe(mainui_xrc.xrcmframe):
         #text=''
         #encoding = None
         #self.tree.DeleteAllItems()
+        log.debug('open '+filename)
         encoding,begin = encdet.detect(filename)
         data = open(filename,'rU').read().decode(encoding)
         items = data.split('=============================')
