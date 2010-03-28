@@ -16,6 +16,7 @@ file_write='../data/unihan3.txt'
 0x4E00-0x9FFF       CJK 统一字型               常用字          共 20992个（实际只定义到0x9FC3)
 0x3400-0x4DFF       CJK 统一字型扩展表A     少用字   共 6656个
 0x20000-0x2A6DF   CJK 统一字型扩展表B  少用字，历史上使用  共42720个
+0x2A700-0x2B73F   CJK 统一字型扩展表C    共4160个汉字，全部定义
 0xF900-0xFAFF       CJK 兼容字型        重复字，可统一变体，共同字  共512个
 0x2F800-0x2FA1F   CJK 兼容字型补遗    可统一变体 共544个
 '''
@@ -44,6 +45,13 @@ if DEBUG != True:
         dict[hz]=ch
         hzlist.append(hz)
     print hex(ord(hz))
+    for hz in xrange(0x2A700,0x2B740):
+        hz = unichr(hz)
+        ch = char.Char(hz)
+        dict[hz]=ch
+        hzlist.append(hz)
+    print hex(ord(hz))
+
     for hz in xrange(0x20000,0x2A6E0):
         hz = unichr(hz)
         ch = char.Char(hz)
